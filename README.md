@@ -1,4 +1,4 @@
-# Gwentverse: Rick and Morty Edition.
+# 🃏Gwentverse: Rick and Morty Edition.
 
 ## 🙂¡Bienvenido!
 
