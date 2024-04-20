@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 5747373129693220594}
   m_Layer: 5
   m_Name: CartaLider
-  m_TagString: Repartiendo
+  m_TagString: Repartiendo1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -142,7 +142,8 @@ MonoBehaviour:
   imagenSprite: {fileID: 7264356479100976164}
   dorsoCarta: 1
   Mano1: {fileID: 0}
-  numeroCartasMazo: 0
+  numeroCartasMazo1: 0
+  numeroCartasMazo2: 0
 --- !u!114 &8188771431781181576
 MonoBehaviour:
   m_ObjectHideFlags: 0

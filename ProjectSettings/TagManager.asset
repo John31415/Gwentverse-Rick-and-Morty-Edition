@@ -7,9 +7,11 @@ TagManager:
   - Clone
   - Lider
   - DropZone
-  - Repartiendo
   - Movida
   - Reciente
+  - Repartiendo1
+  - Repartiendo2
+  - Repartiendo
   layers:
   - Default
   - TransparentFX

@@ -19,8 +19,16 @@ public class CartaLider : MonoBehaviour
     void Update()
     {
         string cad = "Lider";
-        if (estaCarta[0].faccion == 1) cad += "1";
-        else cad += "2";
+        if(esto.tag == "Untagged")
+        {
+            if (esto.GetComponent<EstaCarta>().estaCarta[0].faccion == 1) cad += "1";
+            else cad += "2";
+        }
+        else
+        {
+            if (esto.tag == "Repartiendo1") cad += "1";
+            else cad += "2";
+        }
         mazo = GameObject.Find(cad);
         esto.transform.SetParent(mazo.transform);
     }

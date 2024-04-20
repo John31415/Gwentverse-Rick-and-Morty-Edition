@@ -10,6 +10,9 @@ public class CartaAMover : MonoBehaviour
     public GameObject mazo;
     public GameObject esto;
     public List<Carta> estaCarta = new List<Carta>();
+    
+    public GameObject cartaAMover;
+    public GameObject cartaAMano;
 
     // Start is called before the first frame update
     void Start()
@@ -27,7 +30,7 @@ public class CartaAMover : MonoBehaviour
 
         Efectos();
 
-        if(esto.tag == "Reciente")
+        if (esto.tag == "Reciente")
         {
             esto.tag = "Untagged";
             return;
@@ -70,7 +73,6 @@ public class CartaAMover : MonoBehaviour
         }
         poder = estaCarta[0].poder = esto.GetComponent<EstaCarta>().estaCarta[0].poder;
 
-
         if (faccion == 1) Puntos.puntos1 += poder;
         else Puntos.puntos2 += poder;
 
@@ -95,6 +97,7 @@ public class CartaAMover : MonoBehaviour
         Destroy(esto);
     }
 
+    // Aumenta cada carta de Plata de una fila propia en N unidades
     void Aumento(int faccion, string filas, int ataque)
     {
         string cad = "Fila" + filas + faccion.ToString();
@@ -103,7 +106,7 @@ public class CartaAMover : MonoBehaviour
         for (int i = 0; i < filaCartas.transform.childCount; i++)
         {
             Transform child = filaCartas.transform.GetChild(i);
-            if(child.GetComponent<EstaCarta>().estaCarta[0].tipoId != 5)
+            if (child.GetComponent<EstaCarta>().estaCarta[0].tipoId != 5)
             {
                 continue;
             }
@@ -113,6 +116,7 @@ public class CartaAMover : MonoBehaviour
         }
     }
 
+    // Disminuye cada carta de Plata de una fila propia y del rival en N unidades, si el valor de la carta se vuelve negativo esta es eliminada del campo
     void Clima(string filas, int ataque)
     {
         string cad = "Fila" + filas + "1";
@@ -162,10 +166,11 @@ public class CartaAMover : MonoBehaviour
         }
     }
 
+    // Elimina el clima (si existe) que se encuentra en su fila simetrica en el campo del rival
     void Despeje(int faccion, string filas)
     {
         Transform aux = GameObject.Find("Clima" + filas + (faccion % 2 + 1).ToString()).transform;
-        if(aux.childCount == 0)
+        if (aux.childCount == 0)
         {
             return;
         }
@@ -180,18 +185,19 @@ public class CartaAMover : MonoBehaviour
         Destroy(esto);
     }
 
+    // Elimina carta menos poderosa del rival
     void QuitarMenosPoderosa(int faccion)
     {
         int id = -1, menor = int.MaxValue;
         faccion = faccion % 2 + 1;
-        Transform tM = GameObject.Find("FilaM" + (faccion).ToString() ).transform;
-        Transform tR = GameObject.Find("FilaR" + (faccion).ToString() ).transform;
-        Transform tS = GameObject.Find("FilaS" + (faccion).ToString() ).transform;
+        Transform tM = GameObject.Find("FilaM" + (faccion).ToString()).transform;
+        Transform tR = GameObject.Find("FilaR" + (faccion).ToString()).transform;
+        Transform tS = GameObject.Find("FilaS" + (faccion).ToString()).transform;
 
         for (int i = 0; i < tM.childCount; i++)
         {
             Carta carta_ = tM.GetChild(i).gameObject.GetComponent<EstaCarta>().estaCarta[0];
-            if(carta_.tipoId != 5)
+            if (carta_.tipoId != 5)
             {
                 continue;
             }
@@ -231,7 +237,7 @@ public class CartaAMover : MonoBehaviour
             }
         }
 
-        if(id == -1)
+        if (id == -1)
         {
             return;
         }
@@ -267,6 +273,7 @@ public class CartaAMover : MonoBehaviour
         else Puntos.puntos2 -= menor;
     }
 
+    // Elimina todas las cartas de Plata de la fila no vacia del rival que menor cantidad de cartas contega
     void LimpiaFila(int faccion)
     {
         faccion = faccion % 2 + 1;
@@ -274,9 +281,9 @@ public class CartaAMover : MonoBehaviour
         Transform tR = GameObject.Find("FilaR" + (faccion).ToString()).transform;
         Transform tS = GameObject.Find("FilaS" + (faccion).ToString()).transform;
         int suma = 0;
-        if(tM.childCount <= Math.Min(tR.childCount, tS.childCount))
+        if (tM.childCount <= Math.Min(tR.childCount, tS.childCount) && Math.Min(tR.childCount, tS.childCount) != 0)
         {
-            for(int i=0;i< tM.childCount; i++)
+            for (int i = 0; i < tM.childCount; i++)
             {
                 if (tM.GetChild(i).GetComponent<EstaCarta>().estaCarta[0].tipoId != 5)
                 {
@@ -286,7 +293,7 @@ public class CartaAMover : MonoBehaviour
                 Destroy(tM.GetChild(i).gameObject);
             }
         }
-        else if(tR.childCount <= Math.Min(tM.childCount, tS.childCount))
+        else if (tR.childCount <= Math.Min(tM.childCount, tS.childCount) && Math.Min(tM.childCount, tS.childCount) != 0)
         {
             for (int i = 0; i < tR.childCount; i++)
             {
@@ -298,7 +305,7 @@ public class CartaAMover : MonoBehaviour
                 Destroy(tR.GetChild(i).gameObject);
             }
         }
-        else
+        else if (tS.childCount <= Math.Min(tM.childCount, tR.childCount) && Math.Min(tM.childCount, tR.childCount) != 0)
         {
             for (int i = 0; i < tS.childCount; i++)
             {
@@ -314,44 +321,14 @@ public class CartaAMover : MonoBehaviour
         else Puntos.puntos2 -= suma;
     }
 
-    public GameObject cartaAMano;
 
-    void RobarCarta(int faccion)
-    {
-        StartCoroutine(Robo());
-    }
-
-    IEnumerator Robo()
-    {
-        yield return new WaitForSeconds(0.3f);
-        cartaAMano.tag = "Repartiendo";
-        Instantiate(cartaAMano, transform.position, transform.rotation);
-    }
-
-    void MultiplicaPoder(string nombre, int faccion, string filas)
-    {
-        Transform t = GameObject.Find("Fila" + filas + faccion.ToString()).transform;
-        int contador = 0;
-        for(int i = 0; i < t.childCount; i++)
-        {
-            if (t.GetChild(i).gameObject.GetComponent<EstaCarta>().estaCarta[0].nombre == nombre)
-            {
-                contador++;
-            }
-        }
-        esto.GetComponent<EstaCarta>().estaCarta[0].poder *= contador;
-        if (faccion == 1) Puntos.puntos1 += esto.GetComponent<EstaCarta>().estaCarta[0].poder;
-        else Puntos.puntos2 += esto.GetComponent<EstaCarta>().estaCarta[0].poder;
-    }
-
-    public GameObject cartaAMover;
-
+    // Pone una carta Clima aleatoria de la mano
     void PonerClima(int faccion)
     {
         Transform t = GameObject.Find("PanelHand" + faccion.ToString()).transform;
-        List <GameObject> lista = new List<GameObject>();
+        List<GameObject> lista = new List<GameObject>();
         lista.Clear();
-        for(int i = 0; i < t.childCount; i++)
+        for (int i = 0; i < t.childCount; i++)
         {
             if (t.GetChild(i).gameObject.GetComponent<EstaCarta>().estaCarta[0].tipoId == 1)
             {
@@ -386,7 +363,7 @@ public class CartaAMover : MonoBehaviour
     IEnumerator QuitarInstanciaClima(Transform t, int id)
     {
         yield return new WaitForSeconds(0.3f);
-        for(int i=0;i<t.childCount;i++)
+        for (int i = 0; i < t.childCount; i++)
         {
             if (t.GetChild(i).gameObject.GetComponent<EstaCarta>().estaCarta[0].id == id)
             {
@@ -396,6 +373,37 @@ public class CartaAMover : MonoBehaviour
         }
     }
 
+    // Roba una carta del mazo
+    void RobarCarta(int faccion)
+    {
+        StartCoroutine(Robo(faccion));
+    }
+
+    IEnumerator Robo(int faccion)
+    {
+        yield return new WaitForSeconds(0.3f);
+        cartaAMano.tag = "Repartiendo" + faccion.ToString();
+        Instantiate(cartaAMano, transform.position, transform.rotation);
+    }
+
+    // N = cantidad de cartas iguales a ella en el campo, multiplica su poder por N
+    void MultiplicaPoder(string nombre, int faccion, string filas)
+    {
+        Transform t = GameObject.Find("Fila" + filas + faccion.ToString()).transform;
+        int contador = 0;
+        for (int i = 0; i < t.childCount; i++)
+        {
+            if (t.GetChild(i).gameObject.GetComponent<EstaCarta>().estaCarta[0].nombre == nombre)
+            {
+                contador++;
+            }
+        }
+        esto.GetComponent<EstaCarta>().estaCarta[0].poder *= contador;
+        if (faccion == 1) Puntos.puntos1 += esto.GetComponent<EstaCarta>().estaCarta[0].poder;
+        else Puntos.puntos2 += esto.GetComponent<EstaCarta>().estaCarta[0].poder;
+    }
+
+    // Pone un aumento aleatorio de la mano
     void PonerAumento(int faccion)
     {
         Transform t = GameObject.Find("PanelHand" + faccion.ToString()).transform;
@@ -446,6 +454,7 @@ public class CartaAMover : MonoBehaviour
         }
     }
 
+    // Se intercambia por una carta de unidad aleatoria de la mano
     void Senuelo(int id, int faccion)
     {
         List<GameObject> lista = new List<GameObject>();
