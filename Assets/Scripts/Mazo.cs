@@ -8,7 +8,7 @@ public class Mazo : MonoBehaviour
     public List<Carta> mazoCartas1 = new List<Carta>();
     public List<Carta> mazoCartasAux1 = new List<Carta>();
     public static List<Carta> staticMazoCartas1 = new List<Carta>();
-    public static int mazoSize = 23;
+    public static int mazoSize = 24;
 
     public GameObject cartaEnMazo1;
     public GameObject cartaEnMazo2;
@@ -18,6 +18,8 @@ public class Mazo : MonoBehaviour
 
     public GameObject cartaAMano;
     public GameObject Mano;
+
+    public GameObject cartaLider1;
 
     // Start is called before the first frame update
     void Start()
@@ -41,7 +43,6 @@ public class Mazo : MonoBehaviour
                     cartaAux.filas = BDCartas.cartaClimaList1[aux[3]].filas;
                 }
             }
-            Debug.Log(cartaAux.filas);
             mazoCartasAux1.Add(cartaAux);
         }
         mazoCartas1 = Enumerable.Concat(mazoCartas1,mazoCartasAux1).ToList();
@@ -49,17 +50,14 @@ public class Mazo : MonoBehaviour
         mazoCartas1 = Enumerable.Concat(mazoCartas1,BDCartas.cartaOroList1).ToList();
         mazoCartas1 = Enumerable.Concat(mazoCartas1,BDCartas.cartaPlataList1).ToList();
         mazoCartas1 = Enumerable.Concat(mazoCartas1,BDCartas.cartaSenueloList1).ToList();
+        mazoCartas1 = Enumerable.Concat(mazoCartas1,BDCartas.cartaLiderList1).ToList();
+        
         //Mezclando Mazo1
-        for(int i=0;i<mazoSize;i++)
+        for (int i=0;i<mazoSize - 1;i++)
         {
             int r = Random.Range(0, 22);
-            Debug.Log(mazoCartas1[i].nombre);
-            Debug.Log(mazoCartas1[r].nombre);
             (mazoCartas1[i], mazoCartas1[r]) = (mazoCartas1[r], mazoCartas1[i]);
-            Debug.Log(mazoCartas1[i].nombre);
-            Debug.Log(mazoCartas1[r].nombre);
         }
-
         //Repartir Cartas
         StartCoroutine(ComenzarJuego());
     }
@@ -92,7 +90,12 @@ public class Mazo : MonoBehaviour
     }
     IEnumerator ComenzarJuego()
     {
-        for(int i = 0; i <10; i++)
+        yield return new WaitForSeconds(1);
+        cartaLider1.tag = "Repartiendo";
+        Instantiate(cartaLider1,transform.position,transform.rotation);
+        yield return new WaitForSeconds(0.8f);
+
+        for (int i = 0; i <10; i++)
         {
             yield return new WaitForSeconds(0.2f);
             cartaAMano.tag = "Repartiendo";

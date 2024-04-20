@@ -377,6 +377,7 @@
 "Assets/Scripts/Carta.cs"
 "Assets/Scripts/CartaAMano.cs"
 "Assets/Scripts/CartaAMover.cs"
+"Assets/Scripts/CartaLider.cs"
 "Assets/Scripts/DorsoCarta.cs"
 "Assets/Scripts/EstaCarta.cs"
 "Assets/Scripts/MainMenu.cs"

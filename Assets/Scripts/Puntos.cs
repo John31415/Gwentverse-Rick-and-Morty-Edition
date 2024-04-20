@@ -5,8 +5,8 @@ using TMPro;
 
 public class Puntos : MonoBehaviour
 {
-    public int puntos1;
-    public int puntos2;
+    public static int puntos1;
+    public static int puntos2;
 
     public TMP_Text textPuntos1;
     public TMP_Text textPuntos2;

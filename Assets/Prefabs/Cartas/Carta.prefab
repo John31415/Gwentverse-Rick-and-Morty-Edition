@@ -37,7 +37,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 85, y: 120}
+  m_SizeDelta: {x: 95, y: 134}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1603760553519230100
 MonoBehaviour:
@@ -63,11 +63,6 @@ MonoBehaviour:
     descripcion: 
     spriteImagen: {fileID: 0}
   esteId: 0
-  nombreText: {fileID: 0}
-  faccionText: {fileID: 0}
-  filasText: {fileID: 0}
-  poderText: {fileID: 0}
-  descripcionText: {fileID: 0}
   imagenSprite: {fileID: 9116041133118014291}
   dorsoCarta: 1
   Mano1: {fileID: 0}

@@ -9,6 +9,7 @@ TagManager:
   - DropZone
   - Repartiendo
   - Movida
+  - Reciente
   layers:
   - Default
   - TransparentFX

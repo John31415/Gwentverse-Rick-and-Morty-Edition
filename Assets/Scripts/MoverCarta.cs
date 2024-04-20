@@ -19,6 +19,6 @@ public class MoverCarta : MonoBehaviour
             }
         }
         Instantiate(cartaAMover, transform.position, transform.rotation);
-        //Destroy(cartaHand);
+        Destroy(cartaHand);
     }
 }

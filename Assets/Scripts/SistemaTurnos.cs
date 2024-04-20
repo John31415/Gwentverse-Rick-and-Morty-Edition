@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class SistemaTurnos : MonoBehaviour
 {
-    public int turno;
+    public static int turno;
     public GameObject panel1;
     public GameObject panel2;
 

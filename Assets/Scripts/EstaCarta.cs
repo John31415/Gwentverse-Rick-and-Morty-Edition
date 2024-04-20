@@ -27,10 +27,6 @@ public class EstaCarta : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        imagenSprite.sprite = estaCarta[0].spriteImagen;
-
-        staticDorsoCarta = dorsoCarta;
-
         if (this.tag == "Repartiendo")
         {
             estaCarta[0] = Mazo.staticMazoCartas1[numeroCartasMazo - 1];
@@ -39,6 +35,10 @@ public class EstaCarta : MonoBehaviour
             dorsoCarta = false;
             this.tag = "Untagged";
         }
+        imagenSprite.sprite = estaCarta[0].spriteImagen;
+
+        staticDorsoCarta = dorsoCarta;
+
     }
 
 }

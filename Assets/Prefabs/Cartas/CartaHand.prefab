@@ -262,7 +262,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   estaCarta:
-  - id: 0
+  - id: 29
     nombre: 
     faccion: 0
     filas: 
@@ -272,7 +272,7 @@ MonoBehaviour:
     tipoId: 0
     descripcion: 
     spriteImagen: {fileID: 0}
-  esteId: 0
+  esteId: 14
   imagenSprite: {fileID: 1136791204523050569}
   dorsoCarta: 0
   Mano1: {fileID: 0}

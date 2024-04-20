@@ -221,7 +221,7 @@ GameObject:
   - component: {fileID: 5401691135543478740}
   m_Layer: 5
   m_Name: CartaAMover
-  m_TagString: Movida
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -271,12 +271,7 @@ MonoBehaviour:
     tipoId: 0
     descripcion: 
     spriteImagen: {fileID: 0}
-  esteId: 14
-  nombreText: {fileID: 0}
-  faccionText: {fileID: 0}
-  filasText: {fileID: 0}
-  poderText: {fileID: 0}
-  descripcionText: {fileID: 0}
+  esteId: 12
   imagenSprite: {fileID: 8676865555456229935}
   dorsoCarta: 0
   Mano1: {fileID: 0}
@@ -309,6 +304,8 @@ MonoBehaviour:
   mazo: {fileID: 0}
   esto: {fileID: 7033657317050473430}
   estaCarta: []
+  cartaAMano: {fileID: 5665340795668512853, guid: cb38b8c71092a564490b77483305cb65, type: 3}
+  cartaAMover: {fileID: 7033657317050473430}
 --- !u!1001 &2082588299192593625
 PrefabInstance:
   m_ObjectHideFlags: 0
