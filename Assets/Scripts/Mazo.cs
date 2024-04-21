@@ -15,6 +15,7 @@ public class Mazo : MonoBehaviour
     public static List<Carta> staticMazoCartas2 = new List<Carta>();
     public static int mazoSize2 = 24;
 
+    public static int cantidadRepartir;
 
     public GameObject cartaEnMazo1;
     public GameObject cartaEnMazo2;
@@ -93,14 +94,14 @@ public class Mazo : MonoBehaviour
         //Mezclando Mazo1
         for (int i = 0; i < mazoSize1 - 1; i++)
         {
-            int r = Random.Range(0, 22);
+            int r = Random.Range(0, 23);
             (mazoCartas1[i], mazoCartas1[r]) = (mazoCartas1[r], mazoCartas1[i]);
         }
 
         //Mezclando Mazo2
         for (int i = 0; i < mazoSize2 - 1; i++)
         {
-            int r = Random.Range(0, 22);
+            int r = Random.Range(0, 23);
             (mazoCartas2[i], mazoCartas2[r]) = (mazoCartas2[r], mazoCartas2[i]);
         }
 
@@ -156,14 +157,14 @@ public class Mazo : MonoBehaviour
             cartaEnMazo52.SetActive(false);
         }
     }
+
     IEnumerator ComenzarJuego()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.4f);
         cartaLider1.tag = "Repartiendo1";
         cartaLider2.tag = "Repartiendo2";
         Instantiate(cartaLider1, transform.position, transform.rotation);
         Instantiate(cartaLider2, transform.position, transform.rotation);
-        yield return new WaitForSeconds(0.8f);
 
         for (int i = 0; i < 10; i++)
         {
@@ -173,6 +174,6 @@ public class Mazo : MonoBehaviour
             Instantiate(cartaAMano1, transform.position, transform.rotation);
             Instantiate(cartaAMano2, transform.position, transform.rotation);
         }
+        Controlador.aux = true;
     }
-
 }

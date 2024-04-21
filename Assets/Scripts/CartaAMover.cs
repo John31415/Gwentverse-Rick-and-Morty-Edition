@@ -13,6 +13,7 @@ public class CartaAMover : MonoBehaviour
     
     public GameObject cartaAMover;
     public GameObject cartaAMano;
+    public GameObject cartaARIP;
 
     // Start is called before the first frame update
     void Start()
@@ -65,7 +66,18 @@ public class CartaAMover : MonoBehaviour
                 int ataque_ = tAux.GetChild(0).gameObject.GetComponent<EstaCarta>().estaCarta[0].ataque;
                 if (ataque_ >= esto.GetComponent<EstaCarta>().estaCarta[0].poder)
                 {
-                    StartCoroutine(Destruccion());
+                    StartCoroutine(Destruccion(faccion));
+                    return;
+                }
+                esto.GetComponent<EstaCarta>().estaCarta[0].poder -= ataque_;
+            }
+            tAux = GameObject.Find("Clima" + filas + (faccion % 2 + 1).ToString()).transform;
+            if (tAux.childCount == 1)
+            {
+                int ataque_ = tAux.GetChild(0).gameObject.GetComponent<EstaCarta>().estaCarta[0].ataque;
+                if (ataque_ >= esto.GetComponent<EstaCarta>().estaCarta[0].poder)
+                {
+                    StartCoroutine(Destruccion(faccion));
                     return;
                 }
                 esto.GetComponent<EstaCarta>().estaCarta[0].poder -= ataque_;
@@ -88,13 +100,25 @@ public class CartaAMover : MonoBehaviour
         if (efectoId == 10) Senuelo(id, faccion);
     }
 
-    //public GameObject cartaARIP;
+    void Destructor(GameObject destruir)
+    {
+        for (int i = 0; i < BDCartas.cartasTodas.Count; i++)
+        {
+            if (BDCartas.cartasTodas[i].id == destruir.GetComponent<EstaCarta>().estaCarta[0].id)
+            {
+                cartaARIP.GetComponent<EstaCarta>().esteId = i;
+                break;
+            }
+        }
+        cartaARIP.tag = "RIP" + destruir.GetComponent<EstaCarta>().estaCarta[0].faccion.ToString();
+        Instantiate(cartaARIP, transform.position, transform.rotation);
+        Destroy(destruir);
+    }
 
-    IEnumerator Destruccion()
+    IEnumerator Destruccion(int faccion)
     {
         yield return new WaitForSeconds(0.5f);
-        //Instantiate(cartaARIP, transform.position, transform.rotation);
-        Destroy(esto);
+        Destructor(esto);
     }
 
     // Aumenta cada carta de Plata de una fila propia en N unidades
@@ -133,7 +157,7 @@ public class CartaAMover : MonoBehaviour
             if (ataque >= childPoder)
             {
                 Puntos.puntos1 -= childPoder;
-                Destroy(child.gameObject);
+                Destructor(child.gameObject);
             }
             else
             {
@@ -156,7 +180,7 @@ public class CartaAMover : MonoBehaviour
             if (ataque > childPoder)
             {
                 Puntos.puntos2 -= childPoder;
-                Destroy(child.gameObject);
+                Destructor(child.gameObject);
             }
             else
             {
@@ -180,9 +204,9 @@ public class CartaAMover : MonoBehaviour
     IEnumerator QuitarClima(Transform aux)
     {
         yield return new WaitForSeconds(0.4f);
-        Destroy(aux.GetChild(0).gameObject);
+        Destructor(aux.GetChild(0).gameObject);
         yield return new WaitForSeconds(0.4f);
-        Destroy(esto);
+        Destructor(esto);
     }
 
     // Elimina carta menos poderosa del rival
@@ -247,7 +271,7 @@ public class CartaAMover : MonoBehaviour
             int id_ = tM.GetChild(i).gameObject.GetComponent<EstaCarta>().estaCarta[0].id;
             if (id_ == id)
             {
-                Destroy(tM.GetChild(i).gameObject);
+                Destructor(tM.GetChild(i).gameObject);
                 break;
             }
         }
@@ -256,7 +280,7 @@ public class CartaAMover : MonoBehaviour
             int id_ = tR.GetChild(i).gameObject.GetComponent<EstaCarta>().estaCarta[0].id;
             if (id_ == id)
             {
-                Destroy(tR.GetChild(i).gameObject);
+                Destructor(tR.GetChild(i).gameObject);
                 break;
             }
         }
@@ -265,7 +289,7 @@ public class CartaAMover : MonoBehaviour
             int id_ = tS.GetChild(i).gameObject.GetComponent<EstaCarta>().estaCarta[0].id;
             if (id_ == id)
             {
-                Destroy(tS.GetChild(i).gameObject);
+                Destructor(tS.GetChild(i).gameObject);
                 break;
             }
         }
@@ -290,7 +314,7 @@ public class CartaAMover : MonoBehaviour
                     continue;
                 }
                 suma += tM.GetChild(i).GetComponent<EstaCarta>().estaCarta[0].poder;
-                Destroy(tM.GetChild(i).gameObject);
+                Destructor(tM.GetChild(i).gameObject);
             }
         }
         else if (tR.childCount <= Math.Min(tM.childCount, tS.childCount) && Math.Min(tM.childCount, tS.childCount) != 0)
@@ -302,7 +326,7 @@ public class CartaAMover : MonoBehaviour
                     continue;
                 }
                 suma += tR.GetChild(i).GetComponent<EstaCarta>().estaCarta[0].poder;
-                Destroy(tR.GetChild(i).gameObject);
+                Destructor(tR.GetChild(i).gameObject);
             }
         }
         else if (tS.childCount <= Math.Min(tM.childCount, tR.childCount) && Math.Min(tM.childCount, tR.childCount) != 0)
@@ -314,7 +338,7 @@ public class CartaAMover : MonoBehaviour
                     continue;
                 }
                 suma += tS.GetChild(i).GetComponent<EstaCarta>().estaCarta[0].poder;
-                Destroy(tS.GetChild(i).gameObject);
+                Destructor(tS.GetChild(i).gameObject);
             }
         }
         if (faccion == 1) Puntos.puntos1 -= suma;

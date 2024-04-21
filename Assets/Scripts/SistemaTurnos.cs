@@ -18,7 +18,21 @@ public class SistemaTurnos : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(turno == 1)
+        if (Controlador.jugadorActivo1 && !Controlador.jugadorActivo2)
+        {
+            turno = 1;
+        }
+        else if (!Controlador.jugadorActivo1 && Controlador.jugadorActivo2)
+        {
+            turno = 2;
+        }
+        else if (!Controlador.jugadorActivo1 && !Controlador.jugadorActivo2)
+        {
+            panel1.SetActive(true);
+            panel2.SetActive(true);
+            return;
+        }
+        if (turno == 1)
         {
             panel1.SetActive(false);
             panel2.SetActive(true);
@@ -32,6 +46,8 @@ public class SistemaTurnos : MonoBehaviour
 
     public void CambioTurno()
     {
+        if (turno == 1) Controlador.jugadorActivo1 = false;
+        else Controlador.jugadorActivo2 = false;
         turno = turno % 2 + 1;
     }
 }

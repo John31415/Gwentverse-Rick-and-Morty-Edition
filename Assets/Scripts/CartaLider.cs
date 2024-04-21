@@ -8,11 +8,16 @@ public class CartaLider : MonoBehaviour
     public GameObject esto;
     public List<Carta> estaCarta = new List<Carta>();
 
+    public GameObject cartaAMano;
+
+    public static bool markRobarCarta;
+
     // Start is called before the first frame update
     void Start()
     {
         estaCarta.Clear();
         estaCarta.Add(esto.GetComponent<EstaCarta>().estaCarta[0]);
+        markRobarCarta = false;
     }
 
     // Update is called once per frame
@@ -31,5 +36,22 @@ public class CartaLider : MonoBehaviour
         }
         mazo = GameObject.Find(cad);
         esto.transform.SetParent(mazo.transform);
+    }
+
+    public void RobarCarta()
+    {
+        if(markRobarCarta || Controlador.numeroRonda == 1)
+        {
+            return;
+        }
+        markRobarCarta = true;
+        StartCoroutine(Robo(this.GetComponent<EstaCarta>().estaCarta[0].faccion));
+    }
+
+    IEnumerator Robo(int faccion)
+    {
+        yield return new WaitForSeconds(0.3f);
+        cartaAMano.tag = "Repartiendo" + faccion.ToString();
+        Instantiate(cartaAMano, transform.position, transform.rotation);
     }
 }

@@ -11,12 +11,13 @@ public class EstaCarta : MonoBehaviour
 
     public Image imagenSprite;
 
-    public bool dorsoCarta;
-    public static bool staticDorsoCarta;
-
     public GameObject Mano1;
     public int numeroCartasMazo1;
     public int numeroCartasMazo2;
+
+    public bool auxFinJuego = false;
+    public static int c1 = 0;
+    public static int c2 = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +25,37 @@ public class EstaCarta : MonoBehaviour
         estaCarta[0] = BDCartas.cartasTodas[esteId];
         numeroCartasMazo1 = Mazo.mazoSize1;
         numeroCartasMazo2 = Mazo.mazoSize2;
+
+        if (auxFinJuego)
+        {
+            if (estaCarta[0].id == 17)
+            {
+                estaCarta[0].filas = "M";
+            }
+            if(estaCarta[0].id == 26)
+            {
+                estaCarta[0].filas = "R";
+            }
+            if (estaCarta[0].nombre == "Furp Rock")
+            {
+                estaCarta[0].tipoId = 2;
+                estaCarta[0].filas = "S";
+            }
+            if (estaCarta[0].tipoId == 1)
+            {
+                string[] filas = { "M", "R", "S" };
+                if (estaCarta[0].faccion == 1)
+                {
+                    estaCarta[0].filas = filas[c1];
+                    c1++;
+                }
+                else
+                {
+                    estaCarta[0].filas = filas[c2];
+                    c2++;
+                }
+            }
+        }
     }
 
     // Update is called once per frame
@@ -34,7 +66,6 @@ public class EstaCarta : MonoBehaviour
             estaCarta[0] = Mazo.staticMazoCartas1[numeroCartasMazo1 - 1];
             numeroCartasMazo1--;
             Mazo.mazoSize1--;
-            dorsoCarta = false;
             this.tag = "Untagged";
         }
         if (this.tag == "Repartiendo2")
@@ -42,13 +73,9 @@ public class EstaCarta : MonoBehaviour
             estaCarta[0] = Mazo.staticMazoCartas2[numeroCartasMazo2 - 1];
             numeroCartasMazo2--;
             Mazo.mazoSize2--;
-            dorsoCarta = false;
             this.tag = "Untagged";
         }
         imagenSprite.sprite = estaCarta[0].spriteImagen;
-
-        staticDorsoCarta = dorsoCarta;
-
     }
 
 }
