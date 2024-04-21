@@ -53,6 +53,7 @@ public class Controlador : MonoBehaviour
     {
         if(!band4 && (victorias1 == 6 || victorias2 == 6 || numeroRonda == 4))
         {
+            numeroRonda = 4;
             StartCoroutine(GanadorJuego());
             band4 = true;
         }
@@ -103,11 +104,11 @@ public class Controlador : MonoBehaviour
         yield return new WaitForSeconds(3);
         bigPanel.SetActive(true);
         string cad = "EL GANADOR DE LA PARTIDA ES ";
-        if (Puntos.puntos1 == Puntos.puntos2)
+        if (victorias1 == victorias2)
         {
             cad = "LA PARTIDA HA TERMINADO EN EMPATE";
         }
-        else if (Puntos.puntos1 > Puntos.puntos2)
+        else if (victorias1 > victorias2)
         {
             cad += "RICK";
         }
@@ -180,42 +181,45 @@ public class Controlador : MonoBehaviour
     IEnumerator ComenzarRonda2_3()
     {
         yield return new WaitForSeconds(3);
-        Puntos.puntos1 = 0;
-        Puntos.puntos2 = 0;
-        for (int i = 0; i < 2; i++)
+        if (victorias1 != 6 && victorias2 != 6)
         {
-            yield return new WaitForSeconds(0.2f);
-            if (GameObject.Find("PanelHand1").transform.childCount < 10)
+            Puntos.puntos1 = 0;
+            Puntos.puntos2 = 0;
+            for (int i = 0; i < 2; i++)
             {
-                cartaAMano1.tag = "Repartiendo1";
-                Instantiate(cartaAMano1, transform.position, transform.rotation);
+                yield return new WaitForSeconds(0.2f);
+                if (GameObject.Find("PanelHand1").transform.childCount < 10)
+                {
+                    cartaAMano1.tag = "Repartiendo1";
+                    Instantiate(cartaAMano1, transform.position, transform.rotation);
+                }
+                else
+                {
+                    cartaAMano1.GetComponent<EstaCarta>().estaCarta[0] = Mazo.staticMazoCartas1[Mazo.mazoSize1 - 1];
+                    Mazo.mazoSize1--;
+                    bandDestructorAux = true;
+                    Destructor(cartaAMano1);
+                    bandDestructorAux = false;
+                }
+                if (GameObject.Find("PanelHand2").transform.childCount < 10)
+                {
+                    cartaAMano2.tag = "Repartiendo2";
+                    Instantiate(cartaAMano2, transform.position, transform.rotation);
+                }
+                else
+                {
+                    cartaAMano2.GetComponent<EstaCarta>().estaCarta[0] = Mazo.staticMazoCartas2[Mazo.mazoSize2 - 1];
+                    Mazo.mazoSize2--;
+                    bandDestructorAux = true;
+                    Destructor(cartaAMano2);
+                    bandDestructorAux = false;
+                }
             }
-            else
-            {
-                cartaAMano1.GetComponent<EstaCarta>().estaCarta[0] = Mazo.staticMazoCartas1[Mazo.mazoSize1 - 1];
-                Mazo.mazoSize1--;
-                bandDestructorAux = true;
-                Destructor(cartaAMano1);
-                bandDestructorAux = false;
-            }
-            if (GameObject.Find("PanelHand2").transform.childCount < 10)
-            {
-                cartaAMano2.tag = "Repartiendo2";
-                Instantiate(cartaAMano2, transform.position, transform.rotation);
-            }
-            else
-            {
-                cartaAMano2.GetComponent<EstaCarta>().estaCarta[0] = Mazo.staticMazoCartas2[Mazo.mazoSize2 - 1];
-                Mazo.mazoSize2--;
-                bandDestructorAux = true;
-                Destructor(cartaAMano2);
-                bandDestructorAux = false;
-            }
+            jugadorActivo1 = true;
+            jugadorActivo2 = true;
+            aux = true;
+            numeroRonda++;
         }
-        jugadorActivo1 = true;
-        jugadorActivo2 = true;
-        aux = true;
-        numeroRonda++;
     }
 
     IEnumerator Verificar()

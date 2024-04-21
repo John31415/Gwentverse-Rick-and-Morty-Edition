@@ -1,32 +1,7 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "D:\\Gwent-pro\\Gwentverse-Rick-and-Morty-Edition\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{B345F8C8-0ED9-E282-C945-D658A921FAA4}|Assembly-CSharp.csproj|D:\\Gwent-pro\\Gwentverse-Rick-and-Morty-Edition\\assets\\scripts\\estacarta.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B345F8C8-0ED9-E282-C945-D658A921FAA4}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\estacarta.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B345F8C8-0ED9-E282-C945-D658A921FAA4}|Assembly-CSharp.csproj|D:\\Gwent-pro\\Gwentverse-Rick-and-Morty-Edition\\assets\\scripts\\bdcartas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B345F8C8-0ED9-E282-C945-D658A921FAA4}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\bdcartas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B345F8C8-0ED9-E282-C945-D658A921FAA4}|Assembly-CSharp.csproj|D:\\Gwent-pro\\Gwentverse-Rick-and-Morty-Edition\\assets\\scripts\\carta.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B345F8C8-0ED9-E282-C945-D658A921FAA4}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\carta.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B345F8C8-0ED9-E282-C945-D658A921FAA4}|Assembly-CSharp.csproj|D:\\Gwent-pro\\Gwentverse-Rick-and-Morty-Edition\\assets\\scripts\\cartaamoverfinjuego.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B345F8C8-0ED9-E282-C945-D658A921FAA4}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\cartaamoverfinjuego.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B345F8C8-0ED9-E282-C945-D658A921FAA4}|Assembly-CSharp.csproj|D:\\Gwent-pro\\Gwentverse-Rick-and-Morty-Edition\\assets\\scripts\\controlador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B345F8C8-0ED9-E282-C945-D658A921FAA4}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\controlador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B345F8C8-0ED9-E282-C945-D658A921FAA4}|Assembly-CSharp.csproj|d:\\gwent-pro\\gwentverse-rick-and-morty-edition\\assets\\scripts\\menu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B345F8C8-0ED9-E282-C945-D658A921FAA4}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\menu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -34,89 +9,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": -1,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Menu.cs",
-              "DocumentMoniker": "D:\\Gwent-pro\\Gwentverse-Rick-and-Morty-Edition\\Assets\\Scripts\\Menu.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Menu.cs",
-              "ToolTip": "D:\\Gwent-pro\\Gwentverse-Rick-and-Morty-Edition\\Assets\\Scripts\\Menu.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Menu.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAEAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-21T08:12:32.345Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "CartaAMoverFinJuego.cs",
-              "DocumentMoniker": "D:\\Gwent-pro\\Gwentverse-Rick-and-Morty-Edition\\Assets\\Scripts\\CartaAMoverFinJuego.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\CartaAMoverFinJuego.cs",
-              "ToolTip": "D:\\Gwent-pro\\Gwentverse-Rick-and-Morty-Edition\\Assets\\Scripts\\CartaAMoverFinJuego.cs",
-              "RelativeToolTip": "Assets\\Scripts\\CartaAMoverFinJuego.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-21T07:33:29.72Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Controlador.cs",
-              "DocumentMoniker": "D:\\Gwent-pro\\Gwentverse-Rick-and-Morty-Edition\\Assets\\Scripts\\Controlador.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Controlador.cs",
-              "ToolTip": "D:\\Gwent-pro\\Gwentverse-Rick-and-Morty-Edition\\Assets\\Scripts\\Controlador.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Controlador.cs",
-              "ViewState": "AQIAAEoAAAAAAAAAAAAgwGEAAABKAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-20T08:56:24.725Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "EstaCarta.cs",
-              "DocumentMoniker": "D:\\Gwent-pro\\Gwentverse-Rick-and-Morty-Edition\\Assets\\Scripts\\EstaCarta.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\EstaCarta.cs",
-              "ToolTip": "D:\\Gwent-pro\\Gwentverse-Rick-and-Morty-Edition\\Assets\\Scripts\\EstaCarta.cs",
-              "RelativeToolTip": "Assets\\Scripts\\EstaCarta.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAEEAAABJAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-19T02:52:21.865Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "BDCartas.cs",
-              "DocumentMoniker": "D:\\Gwent-pro\\Gwentverse-Rick-and-Morty-Edition\\Assets\\Scripts\\BDCartas.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\BDCartas.cs",
-              "ToolTip": "D:\\Gwent-pro\\Gwentverse-Rick-and-Morty-Edition\\Assets\\Scripts\\BDCartas.cs",
-              "RelativeToolTip": "Assets\\Scripts\\BDCartas.cs",
-              "ViewState": "AQIAACAAAAAAAAAAAAAAwCwAAAAqAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-19T21:00:46.963Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Carta.cs",
-              "DocumentMoniker": "D:\\Gwent-pro\\Gwentverse-Rick-and-Morty-Edition\\Assets\\Scripts\\Carta.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Carta.cs",
-              "ToolTip": "D:\\Gwent-pro\\Gwentverse-Rick-and-Morty-Edition\\Assets\\Scripts\\Carta.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Carta.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-19T21:00:47.764Z",
-              "EditorCaption": ""
             }
           ]
         }

@@ -33,6 +33,24 @@ public class BDCartas : MonoBehaviour
 
     private void Awake()
     {
+        cartaAumentoList1.Clear();
+        cartaAumentoList2.Clear();
+        cartaClimaList1.Clear();
+        cartaClimaList2.Clear();
+        cartaOroList1.Clear();
+        cartaOroList2.Clear();
+        cartaPlataList1.Clear();
+        cartaPlataList2.Clear();
+        cartaSenueloList1.Clear();
+        cartaSenueloList2.Clear();
+        cartaFaccion1.Clear();
+        cartaFaccion2.Clear();
+        cartaDespejeList1.Clear();
+        cartaDespejeList2.Clear();
+        cartaLiderList1.Clear();
+        cartaLiderList2.Clear();
+        cartasTodas.Clear();
+
         //Aumento
         cartaAumentoList1.Add(new Carta(0,"Jessica",1,"R",0,0,2,0, "Aumento: Suma 2 al poder de cada carta de una fila.", Resources.Load<Sprite>("Cartas/Aumento/JESSICA")));
         cartaAumentoList2.Add(new Carta(1,"Jessica",2,"R",0,0,2, 0, "Aumento: Suma 2 al poder de cada carta de una fila.", Resources.Load<Sprite>("Cartas/Aumento/JESSICA")));

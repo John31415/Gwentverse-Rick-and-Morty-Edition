@@ -15,8 +15,6 @@ public class Mazo : MonoBehaviour
     public static List<Carta> staticMazoCartas2 = new List<Carta>();
     public static int mazoSize2 = 24;
 
-    public static int cantidadRepartir;
-
     public GameObject cartaEnMazo1;
     public GameObject cartaEnMazo2;
     public GameObject cartaEnMazo3;
@@ -37,6 +35,13 @@ public class Mazo : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        mazoCartas1.Clear();
+        mazoCartasAux1.Clear();
+        mazoSize1 = 24;
+        mazoCartas2.Clear();
+        mazoCartasAux2.Clear();
+        mazoSize2 = 24;
+
         //Creando Mazo1
         mazoCartas1 = Enumerable.Concat(mazoCartas1, BDCartas.cartaAumentoList1).ToList();
 

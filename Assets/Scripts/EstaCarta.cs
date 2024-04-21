@@ -46,12 +46,12 @@ public class EstaCarta : MonoBehaviour
                 string[] filas = { "M", "R", "S" };
                 if (estaCarta[0].faccion == 1)
                 {
-                    estaCarta[0].filas = filas[c1];
+                    estaCarta[0].filas = filas[c1 % 3];
                     c1++;
                 }
                 else
                 {
-                    estaCarta[0].filas = filas[c2];
+                    estaCarta[0].filas = filas[c2 % 3];
                     c2++;
                 }
             }
@@ -63,7 +63,7 @@ public class EstaCarta : MonoBehaviour
     {
         if (this.tag == "Repartiendo1")
         {
-            estaCarta[0] = Mazo.staticMazoCartas1[numeroCartasMazo1 - 1];
+            estaCarta[0] = Mazo.staticMazoCartas1[numeroCartasMazo1 - 1];   
             numeroCartasMazo1--;
             Mazo.mazoSize1--;
             this.tag = "Untagged";
