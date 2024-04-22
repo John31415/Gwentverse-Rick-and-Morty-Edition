@@ -386,6 +386,7 @@
 "Assets/Scripts/Menu.cs"
 "Assets/Scripts/MoverCarta.cs"
 "Assets/Scripts/Puntos.cs"
+"Assets/Scripts/Robar2.cs"
 "Assets/Scripts/SistemaTurnos.cs"
 "Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark01.cs"
 "Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark01_UGUI.cs"

@@ -270,7 +270,7 @@ MonoBehaviour:
     tipoId: 2
     descripcion: 'Clima: Resta 4 al poder de cada carta de una fila.'
     spriteImagen: {fileID: 21300000, guid: 82041e37ea233b94a864a2176888c4a1, type: 3}
-  esteId: 45
+  esteId: 43
   imagenSprite: {fileID: 1136791204523050569}
   Mano1: {fileID: 0}
   numeroCartasMazo1: 0

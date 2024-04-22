@@ -422,9 +422,10 @@ public class CartaAMover : MonoBehaviour
                 contador++;
             }
         }
-        esto.GetComponent<EstaCarta>().estaCarta[0].poder *= contador;
         if (faccion == 1) Puntos.puntos1 += esto.GetComponent<EstaCarta>().estaCarta[0].poder;
         else Puntos.puntos2 += esto.GetComponent<EstaCarta>().estaCarta[0].poder;
+        contador++;
+        esto.GetComponent<EstaCarta>().estaCarta[0].poder *= contador;
     }
 
     // Pone un aumento aleatorio de la mano
