@@ -95,7 +95,7 @@ public class CartaAMover : MonoBehaviour
         if (efectoId == 5) LimpiaFila(faccion);
         if (efectoId == 6) PonerClima(faccion);
         if (efectoId == 7) RobarCarta(faccion);
-        if (efectoId == 8) MultiplicaPoder(nombre, faccion, filas);
+        if (efectoId == 8) MultiplicaPoder(id, nombre, faccion, filas);
         if (efectoId == 9) PonerAumento(faccion);
         if (efectoId == 10) Senuelo(id, faccion);
     }
@@ -198,13 +198,42 @@ public class CartaAMover : MonoBehaviour
         {
             return;
         }
-        StartCoroutine(QuitarClima(aux));
+        int puntos1 = 0, puntos2 = 0;
+        Transform filaAux = GameObject.Find("Fila" + filas + faccion.ToString()).transform;
+        for(int i=0;i<filaAux.childCount;i++)
+        {
+            if (filaAux.GetChild(i).gameObject.GetComponent<EstaCarta>().estaCarta[0].tipoId == 5)
+            {
+                filaAux.GetChild(i).gameObject.GetComponent<EstaCarta>().estaCarta[0].poder += aux.GetChild(0).gameObject.GetComponent<EstaCarta>().estaCarta[0].ataque;
+                puntos1 += aux.GetChild(0).gameObject.GetComponent<EstaCarta>().estaCarta[0].ataque;
+            }
+        }
+        filaAux = GameObject.Find("Fila" + filas + (faccion % 2 + 1).ToString()).transform;
+        for (int i = 0; i < filaAux.childCount; i++)
+        {
+            if (filaAux.GetChild(i).gameObject.GetComponent<EstaCarta>().estaCarta[0].tipoId == 5)
+            {
+                filaAux.GetChild(i).gameObject.GetComponent<EstaCarta>().estaCarta[0].poder += aux.GetChild(0).gameObject.GetComponent<EstaCarta>().estaCarta[0].ataque;
+                puntos2 += aux.GetChild(0).gameObject.GetComponent<EstaCarta>().estaCarta[0].ataque;
+            }
+        }
+        StartCoroutine(QuitarClima(aux, faccion, puntos1, puntos2));
     }
 
-    IEnumerator QuitarClima(Transform aux)
+    IEnumerator QuitarClima(Transform aux, int faccion, int puntos1, int puntos2)
     {
         yield return new WaitForSeconds(0.4f);
         Destructor(aux.GetChild(0).gameObject);
+        if(faccion == 1)
+        {
+            Puntos.puntos1 += puntos1;
+            Puntos.puntos2 += puntos2;
+        }
+        else
+        {
+            Puntos.puntos1 += puntos2;
+            Puntos.puntos2 += puntos1;
+        }
         yield return new WaitForSeconds(0.4f);
         Destructor(esto);
     }
@@ -212,139 +241,117 @@ public class CartaAMover : MonoBehaviour
     // Elimina carta menos poderosa del rival
     void QuitarMenosPoderosa(int faccion)
     {
-        int id = -1, menor = int.MaxValue;
+        int pos = -1, menor = int.MaxValue;
+        string fila = "";
         faccion = faccion % 2 + 1;
-        Transform tM = GameObject.Find("FilaM" + (faccion).ToString()).transform;
-        Transform tR = GameObject.Find("FilaR" + (faccion).ToString()).transform;
-        Transform tS = GameObject.Find("FilaS" + (faccion).ToString()).transform;
-
-        for (int i = 0; i < tM.childCount; i++)
+        string[] filas = { "M", "R", "S" };
+        foreach(string f in filas)
         {
-            Carta carta_ = tM.GetChild(i).gameObject.GetComponent<EstaCarta>().estaCarta[0];
-            if (carta_.tipoId != 5)
+            Transform t_ = GameObject.Find("Fila" + f + faccion.ToString()).transform;
+            for(int i=0;i<t_.childCount;i++)
             {
-                continue;
-            }
-            int poder = carta_.poder;
-            if (poder < menor)
-            {
-                menor = poder;
-                id = tM.GetChild(i).gameObject.GetComponent<EstaCarta>().estaCarta[0].id;
-            }
-        }
-        for (int i = 0; i < tR.childCount; i++)
-        {
-            Carta carta_ = tR.GetChild(i).gameObject.GetComponent<EstaCarta>().estaCarta[0];
-            if (carta_.tipoId != 5)
-            {
-                continue;
-            }
-            int poder = carta_.poder;
-            if (poder < menor)
-            {
-                menor = poder;
-                id = tR.GetChild(i).gameObject.GetComponent<EstaCarta>().estaCarta[0].id;
-            }
-        }
-        for (int i = 0; i < tS.childCount; i++)
-        {
-            Carta carta_ = tS.GetChild(i).gameObject.GetComponent<EstaCarta>().estaCarta[0];
-            if (carta_.tipoId != 5)
-            {
-                continue;
-            }
-            int poder = carta_.poder;
-            if (poder < menor)
-            {
-                menor = poder;
-                id = tS.GetChild(i).gameObject.GetComponent<EstaCarta>().estaCarta[0].id;
+                Carta carta_ = t_.GetChild(i).gameObject.GetComponent<EstaCarta>().estaCarta[0];
+                if (carta_.tipoId != 5)
+                {
+                    continue;
+                }
+                int poder = carta_.poder;
+                if (poder < menor)
+                {
+                    menor = poder;
+                    fila = f;
+                    pos = i;
+                }
             }
         }
 
-        if (id == -1)
+        if(pos != -1)
         {
-            return;
+            GameObject g = GameObject.Find("Fila" + fila + faccion.ToString()).transform.GetChild(pos).gameObject;
+            if (faccion == 1) Puntos.puntos1 -= g.GetComponent<EstaCarta>().estaCarta[0].poder;
+            else Puntos.puntos2 -= g.GetComponent<EstaCarta>().estaCarta[0].poder;
+            Destructor(g);
         }
-
-        for (int i = 0; i < tM.childCount; i++)
-        {
-            int id_ = tM.GetChild(i).gameObject.GetComponent<EstaCarta>().estaCarta[0].id;
-            if (id_ == id)
-            {
-                Destructor(tM.GetChild(i).gameObject);
-                break;
-            }
-        }
-        for (int i = 0; i < tR.childCount; i++)
-        {
-            int id_ = tR.GetChild(i).gameObject.GetComponent<EstaCarta>().estaCarta[0].id;
-            if (id_ == id)
-            {
-                Destructor(tR.GetChild(i).gameObject);
-                break;
-            }
-        }
-        for (int i = 0; i < tS.childCount; i++)
-        {
-            int id_ = tS.GetChild(i).gameObject.GetComponent<EstaCarta>().estaCarta[0].id;
-            if (id_ == id)
-            {
-                Destructor(tS.GetChild(i).gameObject);
-                break;
-            }
-        }
-        if (faccion == 1) Puntos.puntos1 -= menor;
-        else Puntos.puntos2 -= menor;
     }
 
     // Elimina todas las cartas de Plata de la fila no vacia del rival que menor cantidad de cartas contega
     void LimpiaFila(int faccion)
     {
         faccion = faccion % 2 + 1;
-        Transform tM = GameObject.Find("FilaM" + (faccion).ToString()).transform;
-        Transform tR = GameObject.Find("FilaR" + (faccion).ToString()).transform;
-        Transform tS = GameObject.Find("FilaS" + (faccion).ToString()).transform;
+
+        string[] filas = { "M", "R", "S" };
+        int menor = int.MaxValue;
+        string fila = "";
+
+        foreach(string f in filas)
+        {
+            Transform t_ = GameObject.Find("Fila" + f + faccion.ToString()).transform;
+            if(t_.childCount < menor && t_.childCount > 0)
+            {
+                menor = t_.childCount;
+                fila = f;
+            }
+        }
+
         int suma = 0;
-        if (tM.childCount <= Math.Min(tR.childCount, tS.childCount) && Math.Min(tR.childCount, tS.childCount) != 0)
+        
+        Transform t = GameObject.Find("Fila" + fila + faccion.ToString()).transform;
+        for (int i = 0; i < t.childCount; i++)
         {
-            for (int i = 0; i < tM.childCount; i++)
+            if (t.GetChild(i).GetComponent<EstaCarta>().estaCarta[0].tipoId == 5)
             {
-                if (tM.GetChild(i).GetComponent<EstaCarta>().estaCarta[0].tipoId != 5)
-                {
-                    continue;
-                }
-                suma += tM.GetChild(i).GetComponent<EstaCarta>().estaCarta[0].poder;
-                Destructor(tM.GetChild(i).gameObject);
+                suma += t.GetChild(i).GetComponent<EstaCarta>().estaCarta[0].poder;
+                Destructor(t.GetChild(i).gameObject);
             }
         }
-        else if (tR.childCount <= Math.Min(tM.childCount, tS.childCount) && Math.Min(tM.childCount, tS.childCount) != 0)
-        {
-            for (int i = 0; i < tR.childCount; i++)
-            {
-                if (tR.GetChild(i).GetComponent<EstaCarta>().estaCarta[0].tipoId != 5)
-                {
-                    continue;
-                }
-                suma += tR.GetChild(i).GetComponent<EstaCarta>().estaCarta[0].poder;
-                Destructor(tR.GetChild(i).gameObject);
-            }
-        }
-        else if (tS.childCount <= Math.Min(tM.childCount, tR.childCount) && Math.Min(tM.childCount, tR.childCount) != 0)
-        {
-            for (int i = 0; i < tS.childCount; i++)
-            {
-                if (tS.GetChild(i).GetComponent<EstaCarta>().estaCarta[0].tipoId != 5)
-                {
-                    continue;
-                }
-                suma += tS.GetChild(i).GetComponent<EstaCarta>().estaCarta[0].poder;
-                Destructor(tS.GetChild(i).gameObject);
-            }
-        }
+
         if (faccion == 1) Puntos.puntos1 -= suma;
         else Puntos.puntos2 -= suma;
-    }
 
+
+        //Transform tM = GameObject.Find("FilaM" + (faccion).ToString()).transform;
+        //Transform tR = GameObject.Find("FilaR" + (faccion).ToString()).transform;
+        //Transform tS = GameObject.Find("FilaS" + (faccion).ToString()).transform;
+        //int suma = 0;
+        //if (tM.childCount <= Math.Min(tR.childCount, tS.childCount) && Math.Min(tR.childCount, tS.childCount) != 0)
+        //{
+        //    for (int i = 0; i < tM.childCount; i++)
+        //    {
+        //        if (tM.GetChild(i).GetComponent<EstaCarta>().estaCarta[0].tipoId != 5)
+        //        {
+        //            continue;
+        //        }
+        //        suma += tM.GetChild(i).GetComponent<EstaCarta>().estaCarta[0].poder;
+        //        Destructor(tM.GetChild(i).gameObject);
+        //    }
+        //}
+        //else if (tR.childCount <= Math.Min(tM.childCount, tS.childCount) && Math.Min(tM.childCount, tS.childCount) != 0)
+        //{
+        //    for (int i = 0; i < tR.childCount; i++)
+        //    {
+        //        if (tR.GetChild(i).GetComponent<EstaCarta>().estaCarta[0].tipoId != 5)
+        //        {
+        //            continue;
+        //        }
+        //        suma += tR.GetChild(i).GetComponent<EstaCarta>().estaCarta[0].poder;
+        //        Destructor(tR.GetChild(i).gameObject);
+        //    }
+        //}
+        //else if (tS.childCount <= Math.Min(tM.childCount, tR.childCount) && Math.Min(tM.childCount, tR.childCount) != 0)
+        //{
+        //    for (int i = 0; i < tS.childCount; i++)
+        //    {
+        //        if (tS.GetChild(i).GetComponent<EstaCarta>().estaCarta[0].tipoId != 5)
+        //        {
+        //            continue;
+        //        }
+        //        suma += tS.GetChild(i).GetComponent<EstaCarta>().estaCarta[0].poder;
+        //        Destructor(tS.GetChild(i).gameObject);
+        //    }
+        //}
+        //if (faccion == 1) Puntos.puntos1 -= suma;
+        //else Puntos.puntos2 -= suma;
+    }
 
     // Pone una carta Clima aleatoria de la mano
     void PonerClima(int faccion)
@@ -411,20 +418,19 @@ public class CartaAMover : MonoBehaviour
     }
 
     // N = cantidad de cartas iguales a ella en el campo, multiplica su poder por N
-    void MultiplicaPoder(string nombre, int faccion, string filas)
+    void MultiplicaPoder(int id ,string nombre, int faccion, string filas)
     {
         Transform t = GameObject.Find("Fila" + filas + faccion.ToString()).transform;
-        int contador = 0;
+        int contador = 1;
         for (int i = 0; i < t.childCount; i++)
         {
-            if (t.GetChild(i).gameObject.GetComponent<EstaCarta>().estaCarta[0].nombre == nombre)
+            if (t.GetChild(i).gameObject.GetComponent<EstaCarta>().estaCarta[0].nombre == nombre && t.GetChild(i).gameObject.GetComponent<EstaCarta>().estaCarta[0].id != id)
             {
                 contador++;
             }
         }
-        if (faccion == 1) Puntos.puntos1 += esto.GetComponent<EstaCarta>().estaCarta[0].poder;
-        else Puntos.puntos2 += esto.GetComponent<EstaCarta>().estaCarta[0].poder;
-        contador++;
+        if (faccion == 1) Puntos.puntos1 += esto.GetComponent<EstaCarta>().estaCarta[0].poder * (contador - 1);
+        else Puntos.puntos2 += esto.GetComponent<EstaCarta>().estaCarta[0].poder * (contador - 1);
         esto.GetComponent<EstaCarta>().estaCarta[0].poder *= contador;
     }
 
@@ -484,42 +490,27 @@ public class CartaAMover : MonoBehaviour
     {
         List<GameObject> lista = new List<GameObject>();
         lista.Clear();
-        Transform tM = GameObject.Find("FilaM" + faccion.ToString()).transform;
-        for (int i = 0; i < tM.childCount; i++)
+        string[] filas = { "M", "R", "S" };
+        foreach(string fila in filas)
         {
-            int tipoId_ = tM.GetChild(i).gameObject.GetComponent<EstaCarta>().estaCarta[0].tipoId;
-            if (tipoId_ == 4 || tipoId_ == 5)
+            Transform t_ = GameObject.Find("Fila" + fila + faccion.ToString()).transform;
+            for (int i = 0; i < t_.childCount; i++)
             {
-                lista.Add(tM.GetChild(i).gameObject);
+                int tipoId_ = t_.GetChild(i).gameObject.GetComponent<EstaCarta>().estaCarta[0].tipoId;
+                if (tipoId_ == 4 || tipoId_ == 5)
+                {
+                    lista.Add(t_.GetChild(i).gameObject);
+                }
             }
         }
-        Transform tR = GameObject.Find("FilaR" + faccion.ToString()).transform;
-        for (int i = 0; i < tR.childCount; i++)
+        if (lista.Count != 0)
         {
-            int tipoId_ = tR.GetChild(i).gameObject.GetComponent<EstaCarta>().estaCarta[0].tipoId;
-            if (tipoId_ == 4 || tipoId_ == 5)
-            {
-                lista.Add(tR.GetChild(i).gameObject);
-            }
+            int r = UnityEngine.Random.Range(0, lista.Count);
+            StartCoroutine(Intercambio(lista[r].GetComponent<EstaCarta>().estaCarta[0].id, faccion));
         }
-        Transform tS = GameObject.Find("FilaS" + faccion.ToString()).transform;
-        for (int i = 0; i < tS.childCount; i++)
-        {
-            int tipoId_ = tS.GetChild(i).gameObject.GetComponent<EstaCarta>().estaCarta[0].tipoId;
-            if (tipoId_ == 4 || tipoId_ == 5)
-            {
-                lista.Add(tS.GetChild(i).gameObject);
-            }
-        }
-        if (lista.Count == 0)
-        {
-            return;
-        }
-        int r = UnityEngine.Random.Range(0, lista.Count - 1);
-        StartCoroutine(Intercambio(tM, tR, tS, lista[r].GetComponent<EstaCarta>().estaCarta[0].id, faccion));
     }
 
-    IEnumerator Intercambio(Transform tM, Transform tR, Transform tS, int id_, int faccion)
+    IEnumerator Intercambio(int id_, int faccion)
     {
         yield return new WaitForSeconds(0.3f);
         for (int i = 0; i < BDCartas.cartasTodas.Count; i++)
@@ -532,34 +523,20 @@ public class CartaAMover : MonoBehaviour
         }
         cartaAMano.tag = "Untagged";
         Instantiate(cartaAMano, transform.position, transform.rotation);
-        for (int i = 0; i < tM.childCount; i++)
+
+        string[] filas = { "M", "R", "S" };
+        foreach (string fila in filas)
         {
-            if (tM.GetChild(i).gameObject.GetComponent<EstaCarta>().estaCarta[0].id == id_)
+            Transform t_ = GameObject.Find("Fila" + fila + faccion.ToString()).transform;
+            for (int i = 0; i < t_.childCount; i++)
             {
-                if (faccion == 1) Puntos.puntos1 -= tM.GetChild(i).gameObject.GetComponent<EstaCarta>().estaCarta[0].poder;
-                else Puntos.puntos2 -= tM.GetChild(i).gameObject.GetComponent<EstaCarta>().estaCarta[0].poder;
-                Destroy(tM.GetChild(i).gameObject);
-                break;
-            }
-        }
-        for (int i = 0; i < tR.childCount; i++)
-        {
-            if (tR.GetChild(i).gameObject.GetComponent<EstaCarta>().estaCarta[0].id == id_)
-            {
-                if (faccion == 1) Puntos.puntos1 -= tR.GetChild(i).gameObject.GetComponent<EstaCarta>().estaCarta[0].poder;
-                else Puntos.puntos2 -= tR.GetChild(i).gameObject.GetComponent<EstaCarta>().estaCarta[0].poder;
-                Destroy(tR.GetChild(i).gameObject);
-                break;
-            }
-        }
-        for (int i = 0; i < tS.childCount; i++)
-        {
-            if (tS.GetChild(i).gameObject.GetComponent<EstaCarta>().estaCarta[0].id == id_)
-            {
-                if (faccion == 1) Puntos.puntos1 -= tS.GetChild(i).gameObject.GetComponent<EstaCarta>().estaCarta[0].poder;
-                else Puntos.puntos2 -= tS.GetChild(i).gameObject.GetComponent<EstaCarta>().estaCarta[0].poder;
-                Destroy(tS.GetChild(i).gameObject);
-                break;
+                if (t_.GetChild(i).gameObject.GetComponent<EstaCarta>().estaCarta[0].id == id_)
+                {
+                    if (faccion == 1) Puntos.puntos1 -= t_.GetChild(i).gameObject.GetComponent<EstaCarta>().estaCarta[0].poder;
+                    else Puntos.puntos2 -= t_.GetChild(i).gameObject.GetComponent<EstaCarta>().estaCarta[0].poder;
+                    Destroy(t_.GetChild(i).gameObject);
+                    break;
+                }
             }
         }
     }

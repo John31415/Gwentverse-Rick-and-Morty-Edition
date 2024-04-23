@@ -373,6 +373,8 @@
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEngine.UI.ref.dll"
 -analyzer:"D:/Install/Unity 2022.3.15f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll"
 -analyzer:"D:/Install/Unity 2022.3.15f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
+"Assets/Packages/ButtonEvents/ButtonDoubleClickListener.cs"
+"Assets/Packages/ButtonEvents/ButtonLongPressListener.cs"
 "Assets/Scripts/BDCartas.cs"
 "Assets/Scripts/Carta.cs"
 "Assets/Scripts/CartaAMano.cs"
