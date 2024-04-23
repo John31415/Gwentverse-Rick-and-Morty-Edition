@@ -293,64 +293,23 @@ public class CartaAMover : MonoBehaviour
             }
         }
 
-        int suma = 0;
-        
-        Transform t = GameObject.Find("Fila" + fila + faccion.ToString()).transform;
-        for (int i = 0; i < t.childCount; i++)
+        if(menor != int.MaxValue)
         {
-            if (t.GetChild(i).GetComponent<EstaCarta>().estaCarta[0].tipoId == 5)
+            int suma = 0;
+        
+            Transform t = GameObject.Find("Fila" + fila + faccion.ToString()).transform;
+            for (int i = 0; i < t.childCount; i++)
             {
-                suma += t.GetChild(i).GetComponent<EstaCarta>().estaCarta[0].poder;
-                Destructor(t.GetChild(i).gameObject);
+                if (t.GetChild(i).GetComponent<EstaCarta>().estaCarta[0].tipoId == 5)
+                {
+                    suma += t.GetChild(i).GetComponent<EstaCarta>().estaCarta[0].poder;
+                    Destructor(t.GetChild(i).gameObject);
+                }
             }
+
+            if (faccion == 1) Puntos.puntos1 -= suma;
+            else Puntos.puntos2 -= suma;
         }
-
-        if (faccion == 1) Puntos.puntos1 -= suma;
-        else Puntos.puntos2 -= suma;
-
-
-        //Transform tM = GameObject.Find("FilaM" + (faccion).ToString()).transform;
-        //Transform tR = GameObject.Find("FilaR" + (faccion).ToString()).transform;
-        //Transform tS = GameObject.Find("FilaS" + (faccion).ToString()).transform;
-        //int suma = 0;
-        //if (tM.childCount <= Math.Min(tR.childCount, tS.childCount) && Math.Min(tR.childCount, tS.childCount) != 0)
-        //{
-        //    for (int i = 0; i < tM.childCount; i++)
-        //    {
-        //        if (tM.GetChild(i).GetComponent<EstaCarta>().estaCarta[0].tipoId != 5)
-        //        {
-        //            continue;
-        //        }
-        //        suma += tM.GetChild(i).GetComponent<EstaCarta>().estaCarta[0].poder;
-        //        Destructor(tM.GetChild(i).gameObject);
-        //    }
-        //}
-        //else if (tR.childCount <= Math.Min(tM.childCount, tS.childCount) && Math.Min(tM.childCount, tS.childCount) != 0)
-        //{
-        //    for (int i = 0; i < tR.childCount; i++)
-        //    {
-        //        if (tR.GetChild(i).GetComponent<EstaCarta>().estaCarta[0].tipoId != 5)
-        //        {
-        //            continue;
-        //        }
-        //        suma += tR.GetChild(i).GetComponent<EstaCarta>().estaCarta[0].poder;
-        //        Destructor(tR.GetChild(i).gameObject);
-        //    }
-        //}
-        //else if (tS.childCount <= Math.Min(tM.childCount, tR.childCount) && Math.Min(tM.childCount, tR.childCount) != 0)
-        //{
-        //    for (int i = 0; i < tS.childCount; i++)
-        //    {
-        //        if (tS.GetChild(i).GetComponent<EstaCarta>().estaCarta[0].tipoId != 5)
-        //        {
-        //            continue;
-        //        }
-        //        suma += tS.GetChild(i).GetComponent<EstaCarta>().estaCarta[0].poder;
-        //        Destructor(tS.GetChild(i).gameObject);
-        //    }
-        //}
-        //if (faccion == 1) Puntos.puntos1 -= suma;
-        //else Puntos.puntos2 -= suma;
     }
 
     // Pone una carta Clima aleatoria de la mano

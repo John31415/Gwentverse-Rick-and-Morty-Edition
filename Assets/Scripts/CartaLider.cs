@@ -10,14 +10,16 @@ public class CartaLider : MonoBehaviour
 
     public GameObject cartaAMano;
 
-    public static bool markRobarCarta;
+    public static bool markRobarCarta1;
+    public static bool markRobarCarta2;
 
     // Start is called before the first frame update
     void Start()
     {
         estaCarta.Clear();
         estaCarta.Add(esto.GetComponent<EstaCarta>().estaCarta[0]);
-        markRobarCarta = false;
+        markRobarCarta1 = false;
+        markRobarCarta2 = false;
     }
 
     // Update is called once per frame
@@ -40,12 +42,19 @@ public class CartaLider : MonoBehaviour
 
     public void RobarCarta()
     {
-        if(markRobarCarta || Controlador.numeroRonda == 1)
+        int faccion = this.GetComponent<EstaCarta>().estaCarta[0].faccion;
+        if (GameObject.Find("PanelHand" + faccion.ToString()).transform.childCount == 10)
         {
             return;
         }
-        markRobarCarta = true;
-        StartCoroutine(Robo(this.GetComponent<EstaCarta>().estaCarta[0].faccion));
+        bool markRobarCarta = markRobarCarta1;
+        if (faccion == 2) markRobarCarta = markRobarCarta2;
+        if (!markRobarCarta && Controlador.numeroRonda != 1)
+        {
+            if (faccion == 1) markRobarCarta1 = true;
+            else markRobarCarta2 = true;
+            StartCoroutine(Robo(faccion));
+        }
     }
 
     IEnumerator Robo(int faccion)
@@ -53,5 +62,6 @@ public class CartaLider : MonoBehaviour
         yield return new WaitForSeconds(0.3f);
         cartaAMano.tag = "Repartiendo" + faccion.ToString();
         Instantiate(cartaAMano, transform.position, transform.rotation);
+        SistemaTurnos.turno = SistemaTurnos.turno % 2 + 1;
     }
 }

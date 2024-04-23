@@ -9,16 +9,19 @@ public class MoverCarta : MonoBehaviour
 
     public void MoverLaCarta()
     {
-        int val = cartaHand.GetComponent<EstaCarta>().estaCarta[0].id;
-        for (int i = 0; i < BDCartas.cartasTodas.Count; i++)
+        if (!Robar2.robado)
         {
-            if (BDCartas.cartasTodas[i].id == val)
+            int val = cartaHand.GetComponent<EstaCarta>().estaCarta[0].id;
+            for (int i = 0; i < BDCartas.cartasTodas.Count; i++)
             {
-                cartaAMover.GetComponent<EstaCarta>().esteId = i;
-                break;
+                if (BDCartas.cartasTodas[i].id == val)
+                {
+                    cartaAMover.GetComponent<EstaCarta>().esteId = i;
+                    break;
+                }
             }
+            Instantiate(cartaAMover, transform.position, transform.rotation);
+            Destroy(cartaHand);
         }
-        Instantiate(cartaAMover, transform.position, transform.rotation);
-        Destroy(cartaHand);
     }
 }

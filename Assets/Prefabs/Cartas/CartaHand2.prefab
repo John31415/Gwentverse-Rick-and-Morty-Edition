@@ -87,6 +87,8 @@ GameObject:
   - component: {fileID: 8257474231297196920}
   - component: {fileID: 283264476779424268}
   - component: {fileID: 7702400603349179667}
+  - component: {fileID: 715415649956205975}
+  - component: {fileID: 3128015378105396801}
   m_Layer: 5
   m_Name: BotonMoverCarta
   m_TagString: Untagged
@@ -207,6 +209,46 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &715415649956205975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5621435208777889214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11f0d11308088a84cb14710399ffe9d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  holdDuration: 0.5
+  onLongPress:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3128015378105396801}
+        m_TargetAssemblyTypeName: Robar2, Assembly-CSharp
+        m_MethodName: Robo
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &3128015378105396801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5621435208777889214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccf6718924ec1f948b5cb9b3f36e8afa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5665340795668512853
 GameObject:
   m_ObjectHideFlags: 0
@@ -260,16 +302,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   estaCarta:
-  - id: 1
-    nombre: Jessica
+  - id: 38
+    nombre: Mr. Poopybutthole
     faccion: 2
-    filas: R
-    poder: 0
-    efectosId: 0
-    ataque: 2
-    tipoId: 0
-    descripcion: 'Aumento: Suma 2 al poder de cada carta de una fila.'
-    spriteImagen: {fileID: 21300000, guid: 7a8474b4937e70e42b348855737f02aa, type: 3}
+    filas: M
+    poder: 1
+    efectosId: 7
+    ataque: 0
+    tipoId: 5
+    descripcion: 'Plata: Permite robar una carta.'
+    spriteImagen: {fileID: 21300000, guid: 53298af335f988946bb63f80110bb896, type: 3}
   esteId: 13
   imagenSprite: {fileID: 1136791204523050569}
   Mano1: {fileID: 0}
