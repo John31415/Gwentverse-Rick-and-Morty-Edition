@@ -384,6 +384,7 @@
 "Assets/Scripts/CartaLider.cs"
 "Assets/Scripts/Controlador.cs"
 "Assets/Scripts/EstaCarta.cs"
+"Assets/Scripts/InfoCarta.cs"
 "Assets/Scripts/Mazo.cs"
 "Assets/Scripts/Menu.cs"
 "Assets/Scripts/MoverCarta.cs"

@@ -218,6 +218,7 @@ GameObject:
   - component: {fileID: 947828352539847195}
   - component: {fileID: 6928639303951015685}
   - component: {fileID: 5401691135543478740}
+  - component: {fileID: 4743159163872497792}
   m_Layer: 5
   m_Name: CartaAMover
   m_TagString: Untagged
@@ -274,6 +275,7 @@ MonoBehaviour:
   Mano1: {fileID: 0}
   numeroCartasMazo1: 0
   numeroCartasMazo2: 0
+  auxFinJuego: 0
 --- !u!114 &5401691135543478740
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -292,3 +294,16 @@ MonoBehaviour:
   cartaAMover: {fileID: 7033657317050473430}
   cartaAMano: {fileID: 5665340795668512853, guid: cb38b8c71092a564490b77483305cb65, type: 3}
   cartaARIP: {fileID: 5665340795668512853, guid: 16bcd9cf79914894aa5bcb20994b8fdc, type: 3}
+--- !u!114 &4743159163872497792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7033657317050473430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: daa3acae380f9224d98f3871cc091321, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panelHover: {fileID: 0}

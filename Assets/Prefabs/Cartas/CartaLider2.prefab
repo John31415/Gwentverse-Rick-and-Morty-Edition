@@ -218,6 +218,7 @@ GameObject:
   - component: {fileID: 6413411048947784245}
   - component: {fileID: 688632787387723915}
   - component: {fileID: 5747373129693220594}
+  - component: {fileID: 7058266140688582655}
   m_Layer: 5
   m_Name: CartaLider2
   m_TagString: Repartiendo2
@@ -291,3 +292,16 @@ MonoBehaviour:
   esto: {fileID: 7781442890044115742}
   estaCarta: []
   cartaAMano: {fileID: 5665340795668512853, guid: cb38b8c71092a564490b77483305cb65, type: 3}
+--- !u!114 &7058266140688582655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7781442890044115742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: daa3acae380f9224d98f3871cc091321, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panelHover: {fileID: 0}

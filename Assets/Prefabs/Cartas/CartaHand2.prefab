@@ -261,6 +261,7 @@ GameObject:
   - component: {fileID: 4924006868075523487}
   - component: {fileID: -6728706070688456882}
   - component: {fileID: 5671735067872536738}
+  - component: {fileID: -4086771278344053869}
   m_Layer: 5
   m_Name: CartaHand2
   m_TagString: Repartiendo2
@@ -346,3 +347,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cartaAMover: {fileID: 7033657317050473430, guid: 43dbd10d941d67f44a33fe75d8693051, type: 3}
   cartaHand: {fileID: 5665340795668512853}
+--- !u!114 &-4086771278344053869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5665340795668512853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: daa3acae380f9224d98f3871cc091321, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panelHover: {fileID: 0}

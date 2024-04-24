@@ -261,6 +261,7 @@ GameObject:
   - component: {fileID: 4924006868075523487}
   - component: {fileID: -6728706070688456882}
   - component: {fileID: 5671735067872536738}
+  - component: {fileID: 1695013496141021202}
   m_Layer: 5
   m_Name: CartaHand
   m_TagString: Repartiendo1
@@ -302,17 +303,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   estaCarta:
-  - id: 14
-    nombre: Ruben
+  - id: 46
+    nombre: Jacob Philip
     faccion: 1
-    filas: R
+    filas: M
     poder: 0
-    efectosId: 2
+    efectosId: 10
     ataque: 0
-    tipoId: 2
-    descripcion: 'Despeje: Elimina Clima de una fila seleccionada propia y del rival.'
-    spriteImagen: {fileID: 21300000, guid: e4693b953c9057843bf4db27b7261349, type: 3}
-  esteId: 16
+    tipoId: 6
+    descripcion: Se intercambia por una carta de unidad propia aleatoria en el campo.
+    spriteImagen: {fileID: 21300000, guid: 5c56e9620b20d754da0ca3610a27a2ac, type: 3}
+  esteId: 38
   imagenSprite: {fileID: 1136791204523050569}
   Mano1: {fileID: 0}
   numeroCartasMazo1: 0
@@ -346,3 +347,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cartaAMover: {fileID: 7033657317050473430, guid: 43dbd10d941d67f44a33fe75d8693051, type: 3}
   cartaHand: {fileID: 5665340795668512853}
+--- !u!114 &1695013496141021202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5665340795668512853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: daa3acae380f9224d98f3871cc091321, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panelHover: {fileID: 0}
