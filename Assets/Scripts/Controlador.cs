@@ -4,15 +4,16 @@ using UnityEngine;
 using TMPro;
 using System;
 using UnityEngine.SceneManagement;
-
+ 
 public class Controlador : MonoBehaviour
 {
     public GameObject cartaARIP;
     public GameObject cartaAMano1;
-    public GameObject cartaAMano2;
+    public GameObject cartaAMano2; 
     public GameObject cartaAMover;
     public GameObject bigPanel;
     public GameObject regresarAMenu;
+    public GameObject panelHover;
 
     public static bool jugadorActivo1;
     public static bool jugadorActivo2;

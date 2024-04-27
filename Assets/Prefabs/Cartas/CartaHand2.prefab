@@ -261,7 +261,7 @@ GameObject:
   - component: {fileID: 4924006868075523487}
   - component: {fileID: -6728706070688456882}
   - component: {fileID: 5671735067872536738}
-  - component: {fileID: -4086771278344053869}
+  - component: {fileID: 6942675716583555456}
   m_Layer: 5
   m_Name: CartaHand2
   m_TagString: Repartiendo2
@@ -303,16 +303,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   estaCarta:
-  - id: 38
-    nombre: Mr. Poopybutthole
+  - id: 17
+    nombre: Vendedor de puertas falsas reales
     faccion: 2
-    filas: M
-    poder: 1
-    efectosId: 7
+    filas: S
+    poder: 0
+    efectosId: 2
     ataque: 0
-    tipoId: 5
-    descripcion: 'Plata: Permite robar una carta.'
-    spriteImagen: {fileID: 21300000, guid: 53298af335f988946bb63f80110bb896, type: 3}
+    tipoId: 2
+    descripcion: Despeja Clima de la fila(S) del campo enemigo.
+    spriteImagen: {fileID: 21300000, guid: 1e883c77fa1143a4ba83598b45eb28d5, type: 3}
   esteId: 13
   imagenSprite: {fileID: 1136791204523050569}
   Mano1: {fileID: 0}
@@ -345,9 +345,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e000ab1aad8e75649b99651c9fa32d01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cartaAMover: {fileID: 7033657317050473430, guid: 43dbd10d941d67f44a33fe75d8693051, type: 3}
+  cartaAMover: {fileID: 2890446157661051169, guid: 523cb639429707a429fd5608a940a829, type: 3}
   cartaHand: {fileID: 5665340795668512853}
---- !u!114 &-4086771278344053869
+--- !u!114 &6942675716583555456
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -359,4 +359,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: daa3acae380f9224d98f3871cc091321, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  panelHover: {fileID: 0}

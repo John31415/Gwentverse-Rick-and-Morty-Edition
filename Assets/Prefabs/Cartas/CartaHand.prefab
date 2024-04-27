@@ -261,7 +261,7 @@ GameObject:
   - component: {fileID: 4924006868075523487}
   - component: {fileID: -6728706070688456882}
   - component: {fileID: 5671735067872536738}
-  - component: {fileID: 1695013496141021202}
+  - component: {fileID: 9209529433641744718}
   m_Layer: 5
   m_Name: CartaHand
   m_TagString: Repartiendo1
@@ -303,17 +303,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   estaCarta:
-  - id: 46
-    nombre: Jacob Philip
+  - id: 48
+    nombre: Gwendolyn
     faccion: 1
-    filas: M
+    filas: R
     poder: 0
     efectosId: 10
     ataque: 0
     tipoId: 6
     descripcion: Se intercambia por una carta de unidad propia aleatoria en el campo.
-    spriteImagen: {fileID: 21300000, guid: 5c56e9620b20d754da0ca3610a27a2ac, type: 3}
-  esteId: 38
+    spriteImagen: {fileID: 21300000, guid: ca519c0860d33a445b90a423e63f39ff, type: 3}
+  esteId: 20
   imagenSprite: {fileID: 1136791204523050569}
   Mano1: {fileID: 0}
   numeroCartasMazo1: 0
@@ -345,9 +345,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e000ab1aad8e75649b99651c9fa32d01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cartaAMover: {fileID: 7033657317050473430, guid: 43dbd10d941d67f44a33fe75d8693051, type: 3}
+  cartaAMover: {fileID: 2890446157661051169, guid: 523cb639429707a429fd5608a940a829, type: 3}
   cartaHand: {fileID: 5665340795668512853}
---- !u!114 &1695013496141021202
+--- !u!114 &9209529433641744718
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -359,4 +359,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: daa3acae380f9224d98f3871cc091321, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  panelHover: {fileID: 0}

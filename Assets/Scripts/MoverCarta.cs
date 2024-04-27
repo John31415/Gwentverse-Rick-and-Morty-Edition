@@ -20,7 +20,7 @@ public class MoverCarta : MonoBehaviour
                     break;
                 }
             }
-            Instantiate(cartaAMover, transform.position, transform.rotation);
+            Instantiate(cartaAMover);
             Destroy(cartaHand);
         }
     }

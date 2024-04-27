@@ -3,24 +3,39 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class InfoCarta : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    public GameObject panelHover;
+    GameObject panelHover;
 
     // Start is called before the first frame update
     void Start()
     {
-        panelHover = GameObject.Find("InfoCarta");
+        panelHover = GameObject.Find("Controlador").GetComponent<Controlador>().panelHover;
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        int tipoId;
+        int poder;
+        string fila;
+        string descripcion;
         panelHover.SetActive(true);
-        int tipoId = this.GetComponent<EstaCarta>().estaCarta[0].tipoId;
-        int poder = this.GetComponent<EstaCarta>().estaCarta[0].poder;
-        string fila = this.GetComponent<EstaCarta>().estaCarta[0].filas;
-        string descripcion = this.GetComponent<EstaCarta>().estaCarta[0].descripcion;
+        if(transform.parent.transform.name == "CartaAMover(Clone)")
+        {
+            tipoId = transform.parent.transform.GetComponent<EstaCarta>().estaCarta[0].tipoId;
+            poder = transform.parent.transform.GetComponent<EstaCarta>().estaCarta[0].poder;
+            fila = transform.parent.transform.GetComponent<EstaCarta>().estaCarta[0].filas;
+            descripcion = transform.parent.transform.GetComponent<EstaCarta>().estaCarta[0].descripcion;
+        }
+        else
+        {
+            tipoId = transform.GetComponent<EstaCarta>().estaCarta[0].tipoId;
+            poder = transform.GetComponent<EstaCarta>().estaCarta[0].poder;
+            fila = transform.GetComponent<EstaCarta>().estaCarta[0].filas;
+            descripcion = transform.GetComponent<EstaCarta>().estaCarta[0].descripcion;
+        }
         string cad = "#Tipo: ";
         if (tipoId == 0) cad += "\"Aumento\"";
         if (tipoId == 1) cad += "\"Clima\"";
@@ -29,7 +44,9 @@ public class InfoCarta : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         if (tipoId == 4) cad += "\"Oro\"";
         if (tipoId == 5) cad += "\"Plata\"";
         if (tipoId == 6) cad += "\"Senuelo\"";
-        cad += "\n#Poder: \"" + poder.ToString() + "\"\n#Fila: \"" + fila + "\"\n<" + descripcion + ">";
+        cad += "\n#Poder: \"";
+        if (poder > 0) cad += poder.ToString();
+        cad += "\"\n#Fila: \"" + fila + "\"\n<" + descripcion + ">";
         panelHover.transform.GetChild(1).gameObject.GetComponent<TMP_Text>().text = cad;
     }
 
