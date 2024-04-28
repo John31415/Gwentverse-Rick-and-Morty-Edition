@@ -20,6 +20,7 @@ public class MoverCarta : MonoBehaviour
                     break;
                 }
             }
+            GameObject.Find("Controlador").GetComponent<Controlador>().panelHover.SetActive(false);
             Instantiate(cartaAMover);
             Destroy(cartaHand);
         }

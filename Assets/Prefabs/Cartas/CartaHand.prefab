@@ -303,17 +303,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   estaCarta:
-  - id: 48
-    nombre: Gwendolyn
+  - id: 3
+    nombre: Jerry Smith
     faccion: 1
-    filas: R
+    filas: S
     poder: 0
-    efectosId: 10
-    ataque: 0
-    tipoId: 6
-    descripcion: Se intercambia por una carta de unidad propia aleatoria en el campo.
-    spriteImagen: {fileID: 21300000, guid: ca519c0860d33a445b90a423e63f39ff, type: 3}
-  esteId: 20
+    efectosId: 0
+    ataque: 3
+    tipoId: 0
+    descripcion: Aumenta en 3 el poder de cada carta de su fila(S).
+    spriteImagen: {fileID: 21300000, guid: e4f2cb361e9feb743b84e37208ff3f2f, type: 3}
+  esteId: 36
   imagenSprite: {fileID: 1136791204523050569}
   Mano1: {fileID: 0}
   numeroCartasMazo1: 0
