@@ -31,5 +31,8 @@ public class CartaAMoverFinJuego : MonoBehaviour
     void Update()
     {
         esto.transform.SetParent(mazo.transform);
+        esto.transform.localScale = Vector3.one;
+        esto.transform.position = new Vector3(transform.position.x, transform.position.y, -48);
+        esto.transform.eulerAngles = new Vector3(0, 0, 0);
     }
 }

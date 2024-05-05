@@ -38,6 +38,9 @@ public class CartaLider : MonoBehaviour
         }
         mazo = GameObject.Find(cad);
         esto.transform.SetParent(mazo.transform);
+        esto.transform.localScale = new Vector3(1.1f, 1.1f, 1.1f);
+        esto.transform.position = new Vector3(transform.position.x, transform.position.y, -48);
+        esto.transform.eulerAngles = new Vector3(0, 0, 0);
     }
 
     public void RobarCarta()
