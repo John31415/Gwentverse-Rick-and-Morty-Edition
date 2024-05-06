@@ -220,7 +220,7 @@ GameObject:
   - component: {fileID: 6674356834607358503}
   m_Layer: 5
   m_Name: CartaRIP
-  m_TagString: RIP1
+  m_TagString: RIP2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -269,7 +269,7 @@ MonoBehaviour:
     tipoId: 0
     descripcion: 
     spriteImagen: {fileID: 0}
-  esteId: 6
+  esteId: 46
   imagenSprite: {fileID: 1136791204523050569}
   Mano1: {fileID: 0}
   numeroCartasMazo1: 0

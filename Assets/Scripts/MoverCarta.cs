@@ -6,6 +6,14 @@ public class MoverCarta : MonoBehaviour
 {
     public GameObject cartaAMover;
     public GameObject cartaHand;
+    public static bool bandSenuelo;
+    public static GameObject objetoAux;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        bandSenuelo = false;
+    }
 
     public void MoverLaCarta()
     {
@@ -21,8 +29,17 @@ public class MoverCarta : MonoBehaviour
                 }
             }
             GameObject.Find("Controlador").GetComponent<Controlador>().panelHover.SetActive(false);
-            Instantiate(cartaAMover);
-            Destroy(cartaHand);
+            if (cartaHand.GetComponent<EstaCarta>().estaCarta[0].tipoId == 6)
+            {
+                objetoAux = cartaHand;
+                bandSenuelo ^= true;
+            }
+            else
+            {
+                bandSenuelo = false;
+                Instantiate(cartaAMover);
+                Destroy(cartaHand);
+            }
         }
     }
 }

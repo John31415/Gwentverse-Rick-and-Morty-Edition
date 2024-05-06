@@ -60,14 +60,14 @@ public class BDCartas : MonoBehaviour
         cartaAumentoList2.Add(new Carta(5, "Summer Smith", 2,"S",0,0,3,0, "Aumenta en 3 el poder de cada carta de su fila(S).", Resources.Load<Sprite>("Cartas/Aumento/SUMMER")));
 
         //Clima
-        cartaClimaList1.Add(new Carta(6, "Furp Rock", 1, "S", 0, 1,4, 1, "Resta 4 al poder de cada carta en su fila(S).", Resources.Load<Sprite>("Cartas/Clima/FURP ROCK")));
-        cartaClimaList2.Add(new Carta(7, "Furp Rock", 2, "S", 0, 1,4, 1, "Resta 4 al poder de cada carta en su fila(S).", Resources.Load<Sprite>("Cartas/Clima/FURP ROCK")));
-        cartaClimaList1.Add(new Carta(8, "Galaxy", 1, "R", 0, 1,3, 1, "Resta 3 al poder de cada carta en su fila(R).", Resources.Load<Sprite>("Cartas/Clima/GALAXY")));
-        cartaClimaList1.Add(new Carta(9, "Pluto", 1, "M", 0, 1,2, 1, "Resta 2 al poder de cada carta en su fila(M).", Resources.Load<Sprite>("Cartas/Clima/PLUTO")));
-        cartaClimaList1.Add(new Carta(10, "Earth", 1, "S", 0, 1,1, 1, "Resta 1 al poder de cada carta en su fila(S).", Resources.Load<Sprite>("Cartas/Clima/EARTH")));
-        cartaClimaList2.Add(new Carta(11, "Midland Quasar", 2, "R", 0, 1,3, 1, "Resta 3 al poder de cada carta en su fila(R).", Resources.Load<Sprite>("Cartas/Clima/MIDLAND QUASAR")));
-        cartaClimaList2.Add(new Carta(12, "Gramuflack", 2, "M", 0, 1,2, 1, "Resta 2 al poder de cada carta en su fila(M).", Resources.Load<Sprite>("Cartas/Clima/GRAMUFLACK")));
-        cartaClimaList2.Add(new Carta(13, "Snake Planet", 2, "S", 0, 1,1, 1, "Resta 1 al poder de cada carta en su fila(S).", Resources.Load<Sprite>("Cartas/Clima/SNAKE PLANET")));
+        cartaClimaList1.Add(new Carta(6, "Furp Rock", 1, "S", 0, 1,4, 1, "Resta 4 al poder de cada carta en su fila.", Resources.Load<Sprite>("Cartas/Clima/FURP ROCK")));
+        cartaClimaList2.Add(new Carta(7, "Furp Rock", 2, "S", 0, 1,4, 1, "Resta 4 al poder de cada carta en su fila.", Resources.Load<Sprite>("Cartas/Clima/FURP ROCK")));
+        cartaClimaList1.Add(new Carta(8, "Galaxy", 1, "R", 0, 1,3, 1, "Resta 3 al poder de cada carta en su fila.", Resources.Load<Sprite>("Cartas/Clima/GALAXY")));
+        cartaClimaList1.Add(new Carta(9, "Pluto", 1, "M", 0, 1,2, 1, "Resta 2 al poder de cada carta en su fila.", Resources.Load<Sprite>("Cartas/Clima/PLUTO")));
+        cartaClimaList1.Add(new Carta(10, "Earth", 1, "S", 0, 1,1, 1, "Resta 1 al poder de cada carta en su fila.", Resources.Load<Sprite>("Cartas/Clima/EARTH")));
+        cartaClimaList2.Add(new Carta(11, "Midland Quasar", 2, "R", 0, 1,3, 1, "Resta 3 al poder de cada carta en su fila.", Resources.Load<Sprite>("Cartas/Clima/MIDLAND QUASAR")));
+        cartaClimaList2.Add(new Carta(12, "Gramuflack", 2, "M", 0, 1,2, 1, "Resta 2 al poder de cada carta en su fila.", Resources.Load<Sprite>("Cartas/Clima/GRAMUFLACK")));
+        cartaClimaList2.Add(new Carta(13, "Snake Planet", 2, "S", 0, 1,1, 1, "Resta 1 al poder de cada carta en su fila.", Resources.Load<Sprite>("Cartas/Clima/SNAKE PLANET")));
 
         //Despeje
         cartaDespejeList1.Add(new Carta(14, "Ruben", 1, "R", 0, 2, 0, 2, "Despeja Clima de la fila(R) del campo enemigo.", Resources.Load<Sprite>("Cartas/Despeje/RUBEN")));
@@ -110,10 +110,10 @@ public class BDCartas : MonoBehaviour
         cartaPlataList2.Add(new Carta(45, "Snuffles (Snowball)", 2, "S", 3, 9, 0, 5, "Activa un Aumento al azar desde la mano.", Resources.Load<Sprite>("Cartas/Plata/SNOWBALLS")));
 
         //Senuelo
-        cartaSenueloList1.Add(new Carta(46, "Jacob Philip", 1, "M", 0, 10, 0, 6, "Se intercambia por una carta de unidad propia aleatoria en el campo.", Resources.Load<Sprite>("Cartas/Señuelo/JACOB PHILIP")));
-        cartaSenueloList2.Add(new Carta(47,"Jacob Philip", 2, "M", 0, 10, 0, 6, "Se intercambia por una carta de unidad propia aleatoria en el campo.", Resources.Load<Sprite>("Cartas/Señuelo/JACOB PHILIP")));
-        cartaSenueloList1.Add(new Carta(48, "Gwendolyn", 1, "R", 0, 10, 0, 6, "Se intercambia por una carta de unidad propia aleatoria en el campo.", Resources.Load<Sprite>("Cartas/Señuelo/GWENDOLYN")));
-        cartaSenueloList2.Add(new Carta(49, "Rey Frijol", 2, "S", 0, 10, 0, 6, "Se intercambia por una carta de unidad propia aleatoria en el campo.", Resources.Load<Sprite>("Cartas/Señuelo/REY FRIJOL")));
+        cartaSenueloList1.Add(new Carta(46, "Jacob Philip", 1, "M", 0, 10, 0, 6, "Se intercambia por una carta de unidad propia a seleccionar.", Resources.Load<Sprite>("Cartas/Señuelo/JACOB PHILIP")));
+        cartaSenueloList2.Add(new Carta(47,"Jacob Philip", 2, "M", 0, 10, 0, 6, "Se intercambia por una carta de unidad propia a seleccionar.", Resources.Load<Sprite>("Cartas/Señuelo/JACOB PHILIP")));
+        cartaSenueloList1.Add(new Carta(48, "Gwendolyn", 1, "R", 0, 10, 0, 6, "Se intercambia por una carta de unidad propia a seleccionar.", Resources.Load<Sprite>("Cartas/Señuelo/GWENDOLYN")));
+        cartaSenueloList2.Add(new Carta(49, "Rey Frijol", 2, "S", 0, 10, 0, 6, "Se intercambia por una carta de unidad propia a seleccionar.", Resources.Load<Sprite>("Cartas/Señuelo/REY FRIJOL")));
 
         //Facciones
         cartaFaccion1 = Enumerable.Concat(cartaFaccion1,cartaAumentoList1).ToList();

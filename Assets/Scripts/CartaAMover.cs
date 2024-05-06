@@ -100,7 +100,6 @@ public class CartaAMover : MonoBehaviour
         if (efectoId == 7) RobarCarta(faccion);
         if (efectoId == 8) MultiplicaPoder(id, nombre, faccion, filas);
         if (efectoId == 9) PonerAumento(faccion);
-        if (efectoId == 10) Senuelo(id, faccion);
     }
 
     void Destructor(GameObject destruir)
@@ -443,62 +442,6 @@ public class CartaAMover : MonoBehaviour
             {
                 Destroy(t.GetChild(i).gameObject);
                 break;
-            }
-        }
-    }
-
-    // Se intercambia por una carta de unidad aleatoria de la mano
-    void Senuelo(int id, int faccion)
-    {
-        List<GameObject> lista = new List<GameObject>();
-        lista.Clear();
-        string[] filas = { "M", "R", "S" };
-        foreach(string fila in filas)
-        {
-            Transform t_ = GameObject.Find("Fila" + fila + faccion.ToString()).transform;
-            for (int i = 0; i < t_.childCount; i++)
-            {
-                int tipoId_ = t_.GetChild(i).gameObject.GetComponent<EstaCarta>().estaCarta[0].tipoId;
-                if (tipoId_ == 4 || tipoId_ == 5)
-                {
-                    lista.Add(t_.GetChild(i).gameObject);
-                }
-            }
-        }
-        if (lista.Count != 0)
-        {
-            int r = UnityEngine.Random.Range(0, lista.Count);
-            StartCoroutine(Intercambio(lista[r].GetComponent<EstaCarta>().estaCarta[0].id, faccion));
-        }
-    }
-
-    IEnumerator Intercambio(int id_, int faccion)
-    {
-        yield return new WaitForSeconds(0.3f);
-        for (int i = 0; i < BDCartas.cartasTodas.Count; i++)
-        {
-            if (BDCartas.cartasTodas[i].id == id_)
-            {
-                cartaAMano.GetComponent<EstaCarta>().esteId = i;
-                break;
-            }
-        }
-        cartaAMano.tag = "Untagged";
-        Instantiate(cartaAMano, transform.position, transform.rotation);
-
-        string[] filas = { "M", "R", "S" };
-        foreach (string fila in filas)
-        {
-            Transform t_ = GameObject.Find("Fila" + fila + faccion.ToString()).transform;
-            for (int i = 0; i < t_.childCount; i++)
-            {
-                if (t_.GetChild(i).gameObject.GetComponent<EstaCarta>().estaCarta[0].id == id_)
-                {
-                    if (faccion == 1) Puntos.puntos1 -= t_.GetChild(i).gameObject.GetComponent<EstaCarta>().estaCarta[0].poder;
-                    else Puntos.puntos2 -= t_.GetChild(i).gameObject.GetComponent<EstaCarta>().estaCarta[0].poder;
-                    Destroy(t_.GetChild(i).gameObject);
-                    break;
-                }
             }
         }
     }
