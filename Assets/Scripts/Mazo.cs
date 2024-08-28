@@ -68,7 +68,6 @@ public class Mazo : MonoBehaviour
         mazoCartas1 = Enumerable.Concat(mazoCartas1, BDCartas.cartaOroList1).ToList();
         mazoCartas1 = Enumerable.Concat(mazoCartas1, BDCartas.cartaPlataList1).ToList();
         mazoCartas1 = Enumerable.Concat(mazoCartas1, BDCartas.cartaSenueloList1).ToList();
-        mazoCartas1 = Enumerable.Concat(mazoCartas1, BDCartas.cartaLiderList1).ToList();
 
         //Creando Mazo2
         mazoCartas2 = Enumerable.Concat(mazoCartas2, BDCartas.cartaAumentoList2).ToList();
@@ -94,7 +93,6 @@ public class Mazo : MonoBehaviour
         mazoCartas2 = Enumerable.Concat(mazoCartas2, BDCartas.cartaOroList2).ToList();
         mazoCartas2 = Enumerable.Concat(mazoCartas2, BDCartas.cartaPlataList2).ToList();
         mazoCartas2 = Enumerable.Concat(mazoCartas2, BDCartas.cartaSenueloList2).ToList();
-        mazoCartas2 = Enumerable.Concat(mazoCartas2, BDCartas.cartaLiderList2).ToList();
 
         //Mezclando Mazo1
         for (int i = 0; i < mazoSize1 - 1; i++)
@@ -103,12 +101,20 @@ public class Mazo : MonoBehaviour
             (mazoCartas1[i], mazoCartas1[r]) = (mazoCartas1[r], mazoCartas1[i]);
         }
 
+        mazoCartas1 = Enumerable.Concat(mazoCartas1, BDCartas.cartaOdin1).ToList();
+        mazoCartas1 = Enumerable.Concat(mazoCartas1, BDCartas.cartaLiderList1).ToList();
+        mazoSize1 += BDCartas.cartaOdin1.Count;
+
         //Mezclando Mazo2
-        for (int i = 0; i < mazoSize2 - 1; i++)
+        for (int i = 0; i < mazoSize2 - 16; i++)
         {
             int r = Random.Range(0, 23);
             (mazoCartas2[i], mazoCartas2[r]) = (mazoCartas2[r], mazoCartas2[i]);
         }
+
+        mazoCartas2 = Enumerable.Concat(mazoCartas2, BDCartas.cartaOdin2).ToList();
+        mazoCartas2 = Enumerable.Concat(mazoCartas2, BDCartas.cartaLiderList2).ToList();
+        mazoSize2 += BDCartas.cartaOdin2.Count;
 
         //Repartir Cartas
         StartCoroutine(ComenzarJuego());

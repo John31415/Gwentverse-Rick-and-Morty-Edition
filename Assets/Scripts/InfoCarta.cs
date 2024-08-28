@@ -4,6 +4,9 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using System;
+
+using Odin;
 
 public class InfoCarta : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {

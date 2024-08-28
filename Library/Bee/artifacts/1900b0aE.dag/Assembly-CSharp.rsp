@@ -120,6 +120,7 @@
 -define:TEXTCORE_FONT_ENGINE_1_5_OR_NEWER
 -define:CSHARP_7_OR_LATER
 -define:CSHARP_7_3_OR_NEWER
+-r:"Assets/Plugins/Odin.dll"
 -r:"D:/Install/Unity 2022.3.15f1/Editor/Data/Managed/UnityEngine/UnityEditor.CoreModule.dll"
 -r:"D:/Install/Unity 2022.3.15f1/Editor/Data/Managed/UnityEngine/UnityEditor.DeviceSimulatorModule.dll"
 -r:"D:/Install/Unity 2022.3.15f1/Editor/Data/Managed/UnityEngine/UnityEditor.DiagnosticsModule.dll"
@@ -386,14 +387,15 @@
 "Assets/Scripts/CartaARIP.cs"
 "Assets/Scripts/CartaLider.cs"
 "Assets/Scripts/Controlador.cs"
-"Assets/Scripts/DataCollecter.cs"
 "Assets/Scripts/EstaCarta.cs"
 "Assets/Scripts/InfoCarta.cs"
 "Assets/Scripts/Mazo.cs"
 "Assets/Scripts/Menu.cs"
 "Assets/Scripts/MoverCarta.cs"
+"Assets/Scripts/Odin/CardCreator.cs"
+"Assets/Scripts/Odin/DataCollecter.cs"
+"Assets/Scripts/Odin/RecibirInput.cs"
 "Assets/Scripts/Puntos.cs"
-"Assets/Scripts/RecibirInput.cs"
 "Assets/Scripts/Robar2.cs"
 "Assets/Scripts/Senuelo.cs"
 "Assets/Scripts/SistemaTurnos.cs"
