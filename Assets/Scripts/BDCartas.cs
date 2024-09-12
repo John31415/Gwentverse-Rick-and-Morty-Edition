@@ -81,6 +81,7 @@ public class BDCartas : MonoBehaviour
         sprites["Jacob Philip"] = "Cartas/Señuelo/JACOB PHILIP";
         sprites["Gwendolyn"] = "Cartas/Señuelo/GWENDOLYN";
         sprites["Rey Frijol"] = "Cartas/Señuelo/REY FRIJOL";
+        sprites["Odin"] = "Cartas/Odin/ODIN";
 
         //Aumento
         cartaAumentoList1.Add(new Carta(0, "Jessica", 1, "R", 0, 0, 2, 0, "Aumenta en 2 el poder de cada carta de su fila(R).", Resources.Load<Sprite>(sprites["Jessica"])));

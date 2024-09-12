@@ -20,7 +20,7 @@ public class CardCreator
             int ataque = 0;
             int tipoId = TipoId(card.Type);
             string descripcion = "'Interpretado por Odin.'";
-            string imagen = "Rick Sanchez";
+            string imagen = "Odin";
             if (sprites.ContainsKey(nombre))
             {
                 imagen = sprites[nombre];
@@ -91,5 +91,6 @@ public class CardCreator
         sprites["Jacob Philip"] = "Cartas/Señuelo/JACOB PHILIP";
         sprites["Gwendolyn"] = "Cartas/Señuelo/GWENDOLYN";
         sprites["Rey Frijol"] = "Cartas/Señuelo/REY FRIJOL";
+        sprites["Odin"] = "Cartas/Odin/ODIN";
     }
 }
