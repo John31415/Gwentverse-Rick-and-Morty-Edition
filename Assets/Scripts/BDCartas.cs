@@ -36,25 +36,15 @@ public class BDCartas : MonoBehaviour
 
     public static Dictionary<string, string> sprites = new Dictionary<string, string>();
 
-    private void Awake()
+    private static bool band = false;
+
+    public static void Inicializar()
     {
-        cartaAumentoList1.Clear();
-        cartaAumentoList2.Clear();
-        cartaClimaList1.Clear();
-        cartaClimaList2.Clear();
-        cartaOroList1.Clear();
-        cartaOroList2.Clear();
-        cartaPlataList1.Clear();
-        cartaPlataList2.Clear();
-        cartaSenueloList1.Clear();
-        cartaSenueloList2.Clear();
-        cartaFaccion1.Clear();
-        cartaFaccion2.Clear();
-        cartaDespejeList1.Clear();
-        cartaDespejeList2.Clear();
-        cartaLiderList1.Clear();
-        cartaLiderList2.Clear();
-        cartasTodas.Clear();
+        if (band == true)
+        {
+            return;
+        }
+        band = true;
 
         //Sprites
         sprites["Jessica"] = "Cartas/Aumento/JESSICA";

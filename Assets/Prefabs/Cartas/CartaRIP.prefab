@@ -269,7 +269,7 @@ MonoBehaviour:
     tipoId: 0
     descripcion: 
     spriteImagen: {fileID: 0}
-  esteId: 46
+  esteId: 27
   imagenSprite: {fileID: 1136791204523050569}
   Mano1: {fileID: 0}
   numeroCartasMazo1: 0

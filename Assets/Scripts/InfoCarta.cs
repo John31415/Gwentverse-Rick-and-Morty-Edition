@@ -48,7 +48,7 @@ public class InfoCarta : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         if (tipoId == 5) cad += "\"Plata\"";
         if (tipoId == 6) cad += "\"Senuelo\"";
         cad += "\n#Poder: \"";
-        if (poder > 0) cad += poder.ToString();
+        cad += poder.ToString();
         cad += "\"\n#Fila: \"" + fila + "\"\n<" + descripcion + ">";
         panelHover.transform.GetChild(1).gameObject.GetComponent<TMP_Text>().text = cad;
     }

@@ -12,6 +12,7 @@ public class Menu : MonoBehaviour
 
     public void CrearCarta()
     {
+        BDCartas.Inicializar();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
     }
 

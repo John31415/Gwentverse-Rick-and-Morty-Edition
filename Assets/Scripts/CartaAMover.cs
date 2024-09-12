@@ -4,16 +4,19 @@ using UnityEditor.Build;
 using UnityEngine;
 using System;
 using Unity.VisualScripting;
+using Odin;
 
 public class CartaAMover : MonoBehaviour
 {
     public GameObject mazo;
     public GameObject esto;
     public List<Carta> estaCarta = new List<Carta>();
-    
+
     public GameObject cartaAMover;
     public GameObject cartaAMano;
     public GameObject cartaARIP;
+
+    public bool bandReciente = false;
 
     // Start is called before the first frame update
     void Start()
@@ -29,7 +32,9 @@ public class CartaAMover : MonoBehaviour
         else cad += "2";
         mazo = GameObject.Find(cad);
 
-        Efectos();
+        if (!bandReciente) Efectos();
+        else return;
+        bandReciente = false;
 
         if (esto.tag == "Reciente")
         {
@@ -100,7 +105,231 @@ public class CartaAMover : MonoBehaviour
         if (efectoId == 7) RobarCarta(faccion);
         if (efectoId == 8) MultiplicaPoder(id, nombre, faccion, filas);
         if (efectoId == 9) PonerAumento(faccion);
+        if (efectoId == 10)
+        {
+            DataCollecter dataCollecter = new DataCollecter();
+            dataCollecter.Collect(id);
+            GameState gameState = dataCollecter.Estado();
+
+            List<Carta> estaCarta = new List<Carta>();
+            for (int i = 0; i < BDCartas.cartasTodas.Count; i++)
+            {
+                if (BDCartas.cartasTodas[i].id == id)
+                {
+                    estaCarta.Add(BDCartas.cartasTodas[i]);
+                }
+            }
+            Run.RunEffect(estaCarta[0].nombre, gameState);
+
+            Actualizar(gameState, estaCarta[0].poder, estaCarta[0].faccion);
+        }
     }
+    #region Actualizar Juego
+
+    public GameObject HandCard1;
+    public GameObject HandCard2;
+    public GameObject FieldCard;
+    public GameObject GraveyardCard;
+
+    public void Actualizar(GameState gameState, int PODER, int FACCION)
+    {
+        long triggerPlayer = gameState.TriggerPlayer;
+        long otherPlayer = triggerPlayer % 2 + 1;
+        Lists deck = gameState.Deck;
+        Lists otherDeck = gameState.OtherDeck;
+        Lists hand = gameState.Hand;
+        Lists otherHand = gameState.OtherHand;
+        Lists field = gameState.Field;
+        Lists otherField = gameState.OtherField;
+        Lists graveyard = gameState.Graveyard;
+        Lists otherGraveyard = gameState.OtherGraveyard;
+
+        foreach (var card in deck.Cards) BDCartas.cartasTodas[BuscarId((int)card.Id)] = ConvertirCard(card);
+        foreach (var card in otherDeck.Cards) BDCartas.cartasTodas[BuscarId((int)card.Id)] = ConvertirCard(card);
+        foreach (var card in hand.Cards) BDCartas.cartasTodas[BuscarId((int)card.Id)] = ConvertirCard(card);
+        foreach (var card in otherHand.Cards) BDCartas.cartasTodas[BuscarId((int)card.Id)] = ConvertirCard(card);
+        foreach (var card in field.Cards) BDCartas.cartasTodas[BuscarId((int)card.Id)] = ConvertirCard(card);
+        foreach (var card in otherField.Cards) BDCartas.cartasTodas[BuscarId((int)card.Id)] = ConvertirCard(card);
+        foreach (var card in graveyard.Cards) BDCartas.cartasTodas[BuscarId((int)card.Id)] = ConvertirCard(card);
+        foreach (var card in otherGraveyard.Cards) BDCartas.cartasTodas[BuscarId((int)card.Id)] = ConvertirCard(card);
+
+        if (triggerPlayer == 1)
+        {
+            ActualizarDeck(deck.Cards, otherDeck.Cards);
+            ActualizarField(field.Cards, otherField.Cards, PODER, FACCION);
+            ActualizarRIP(graveyard.Cards, otherGraveyard.Cards);
+            ActualizarHand(hand.Cards, otherHand.Cards);
+        }
+        else
+        {
+            ActualizarDeck(otherDeck.Cards, deck.Cards);
+            ActualizarField(otherField.Cards, field.Cards, PODER, FACCION);
+            ActualizarRIP(otherGraveyard.Cards, graveyard.Cards);
+            ActualizarHand(otherHand.Cards, hand.Cards);
+        }
+    }
+
+    public void ActualizarDeck(List<Card> deck, List<Card> otherDeck)
+    {
+        Mazo.staticMazoCartas1 = new List<Carta>();
+        foreach (var card in deck)
+        {
+            Mazo.staticMazoCartas1.Add(ConvertirCard(card));
+        }
+        Mazo.staticMazoCartas2 = new List<Carta>();
+        foreach (var card in otherDeck)
+        {
+            Mazo.staticMazoCartas2.Add(ConvertirCard(card));
+        }
+        Mazo.mazoSize1 = deck.Count;
+        Mazo.mazoSize2 = otherDeck.Count;
+    }
+
+    public void ActualizarHand(List<Card> hand, List<Card> otherHand)
+    {
+        GameObject handZone = GameObject.Find("PanelHand1");
+        GameObject otherHandZone = GameObject.Find("PanelHand2");
+        Destroyer(handZone);
+        Destroyer(otherHandZone);
+        foreach (var card in hand)
+        {
+            HandCard1.tag = "Untagged";
+            HandCard1 = Instantiate(HandCard1);
+            List<Carta> estaCarta = new List<Carta> { ConvertirCard(card) };
+            HandCard1.GetComponent<EstaCarta>().esteId = BuscarId(estaCarta[0].id);
+            HandCard1.GetComponent<EstaCarta>().estaCarta = estaCarta;
+        }
+        foreach (var card in otherHand)
+        {
+            HandCard2.tag = "Untagged";
+            HandCard2 = Instantiate(HandCard2);
+            List<Carta> estaCarta = new List<Carta> { ConvertirCard(card) };
+            HandCard2.GetComponent<EstaCarta>().esteId = BuscarId(estaCarta[0].id);
+            HandCard2.GetComponent<EstaCarta>().estaCarta = estaCarta;
+        }
+    }
+
+    public void ActualizarField(List<Card> field, List<Card> otherField, int PODER, int FACCION)
+    {
+        string[] zones = { "Fila", "Aumento", "Clima" };
+        string filas = "MRS";
+        for (int i = 0; i < 3; i++)
+        {
+            for (int j = 0; j < 3; j++)
+            {
+                GameObject Zone1 = GameObject.Find(zones[i] + filas[j] + "1");
+                GameObject Zone2 = GameObject.Find(zones[i] + filas[j] + "2");
+                Destroyer(Zone1);
+                Destroyer(Zone2);
+            }
+        }
+        Puntos.puntos1 = 0;
+        Puntos.puntos2 = 0;
+        if (FACCION == 1) Puntos.puntos1 = PODER;
+        else Puntos.puntos2 = PODER;
+        foreach (var card in field)
+        {
+            List<Carta> estaCarta = new List<Carta> { ConvertirCard(card) };
+            if (estaCarta[0].faccion == 1) Puntos.puntos1 += estaCarta[0].poder;
+            else Puntos.puntos2 += estaCarta[0].poder;
+            string zone = "";
+            if (estaCarta[0].tipoId == 0) zone += "Aumento";
+            else if (estaCarta[0].tipoId == 1) zone += "Clima";
+            else zone += "Fila";
+            zone += estaCarta[0].filas[0];
+            zone += estaCarta[0].faccion.ToString();
+            GameObject Zone = GameObject.Find(zone);
+            FieldCard.GetComponent<CartaAMover>().bandReciente = true;
+            FieldCard = Instantiate(FieldCard);
+            FieldCard.GetComponent<EstaCarta>().esteId = BuscarId(estaCarta[0].id);
+            FieldCard.GetComponent<EstaCarta>().estaCarta = estaCarta;
+            FieldCard.transform.SetParent(Zone.transform);
+        }
+        foreach (var card in otherField)
+        {
+            List<Carta> estaCarta = new List<Carta> { ConvertirCard(card) };
+            if (estaCarta[0].faccion == 1) Puntos.puntos1 += estaCarta[0].poder;
+            else Puntos.puntos2 += estaCarta[0].poder;
+            string zone = "";
+            if (estaCarta[0].tipoId == 0) zone += "Aumento";
+            else if (estaCarta[0].tipoId == 1) zone += "Clima";
+            else zone += "Fila";
+            zone += estaCarta[0].filas[0];
+            zone += estaCarta[0].faccion.ToString();
+            GameObject Zone = GameObject.Find(zone);
+            FieldCard.GetComponent<CartaAMover>().bandReciente = true;
+            FieldCard = Instantiate(FieldCard);
+            FieldCard.GetComponent<EstaCarta>().esteId = BuscarId(estaCarta[0].id);
+            FieldCard.GetComponent<EstaCarta>().estaCarta = estaCarta;
+            FieldCard.transform.SetParent(Zone.transform);
+        }
+    }
+
+    public void ActualizarRIP(List<Card> graveyard, List<Card> otherGraveyard)
+    {
+        GameObject graveyardZone = GameObject.Find("RIP1");
+        GameObject otherGraveyardZone = GameObject.Find("RIP2");
+        Destroyer(graveyardZone);
+        Destroyer(otherGraveyardZone);
+        foreach (var card in graveyard)
+        {
+            GraveyardCard = Instantiate(GraveyardCard);
+            List<Carta> estaCarta = new List<Carta> { ConvertirCard(card) };
+            GraveyardCard.GetComponent<EstaCarta>().esteId = BuscarId(estaCarta[0].id);
+            GraveyardCard.GetComponent<EstaCarta>().estaCarta = estaCarta;
+            GraveyardCard.tag = "RIP1";
+        }
+        foreach (var card in otherGraveyard)
+        {
+            GraveyardCard = Instantiate(GraveyardCard);
+            List<Carta> estaCarta = new List<Carta> { ConvertirCard(card) };
+            GraveyardCard.GetComponent<EstaCarta>().esteId = BuscarId(estaCarta[0].id);
+            GraveyardCard.GetComponent<EstaCarta>().estaCarta = estaCarta;
+            GraveyardCard.tag = "RIP2";
+        }
+    }
+
+    public int BuscarId(int id)
+    {
+        for (int i = 0; i < BDCartas.cartasTodas.Count; i++)
+        {
+            if (BDCartas.cartasTodas[i].id == id)
+            {
+                return i;
+            }
+        }
+        return 0;
+    }
+
+    public void Destroyer(GameObject obj)
+    {
+        for (int i = 0; i < obj.transform.childCount; i++)
+        {
+            Destroy(obj.transform.GetChild(i).gameObject);
+        }
+    }
+
+    public Carta ConvertirCard(Card card)
+    {
+        long id = card.Id;
+        List<Carta> estaCarta = new List<Carta>();
+        for (int i = 0; i < BDCartas.cartasTodas.Count; i++)
+        {
+            if (BDCartas.cartasTodas[i].id == id)
+            {
+                estaCarta.Add(BDCartas.cartasTodas[i]);
+            }
+        }
+        return new Carta((int)card.Id, card.Name, Faccion(card.Faction), card.Range, (int)card.Power, estaCarta[0].efectosId, estaCarta[0].ataque, estaCarta[0].tipoId, estaCarta[0].descripcion, estaCarta[0].spriteImagen);
+    }
+
+    public int Faccion(string faccion)
+    {
+        if (faccion == "Rick Sanchez") return 1;
+        return 2;
+    }
+
+    #endregion
 
     void Destructor(GameObject destruir)
     {
@@ -202,7 +431,7 @@ public class CartaAMover : MonoBehaviour
         }
         int puntos1 = 0, puntos2 = 0;
         Transform filaAux = GameObject.Find("Fila" + filas + faccion.ToString()).transform;
-        for(int i=0;i<filaAux.childCount;i++)
+        for (int i = 0; i < filaAux.childCount; i++)
         {
             if (filaAux.GetChild(i).gameObject.GetComponent<EstaCarta>().estaCarta[0].tipoId == 5)
             {
@@ -226,7 +455,7 @@ public class CartaAMover : MonoBehaviour
     {
         yield return new WaitForSeconds(0.4f);
         Destructor(aux.GetChild(0).gameObject);
-        if(faccion == 1)
+        if (faccion == 1)
         {
             Puntos.puntos1 += puntos1;
             Puntos.puntos2 += puntos2;
@@ -247,10 +476,10 @@ public class CartaAMover : MonoBehaviour
         string fila = "";
         faccion = faccion % 2 + 1;
         string[] filas = { "M", "R", "S" };
-        foreach(string f in filas)
+        foreach (string f in filas)
         {
             Transform t_ = GameObject.Find("Fila" + f + faccion.ToString()).transform;
-            for(int i=0;i<t_.childCount;i++)
+            for (int i = 0; i < t_.childCount; i++)
             {
                 Carta carta_ = t_.GetChild(i).gameObject.GetComponent<EstaCarta>().estaCarta[0];
                 if (carta_.tipoId != 5)
@@ -267,7 +496,7 @@ public class CartaAMover : MonoBehaviour
             }
         }
 
-        if(pos != -1)
+        if (pos != -1)
         {
             GameObject g = GameObject.Find("Fila" + fila + faccion.ToString()).transform.GetChild(pos).gameObject;
             if (faccion == 1) Puntos.puntos1 -= g.GetComponent<EstaCarta>().estaCarta[0].poder;
@@ -285,20 +514,20 @@ public class CartaAMover : MonoBehaviour
         int menor = int.MaxValue;
         string fila = "";
 
-        foreach(string f in filas)
+        foreach (string f in filas)
         {
             Transform t_ = GameObject.Find("Fila" + f + faccion.ToString()).transform;
-            if(t_.childCount < menor && t_.childCount > 0)
+            if (t_.childCount < menor && t_.childCount > 0)
             {
                 menor = t_.childCount;
                 fila = f;
             }
         }
 
-        if(menor != int.MaxValue)
+        if (menor != int.MaxValue)
         {
             int suma = 0;
-        
+
             Transform t = GameObject.Find("Fila" + fila + faccion.ToString()).transform;
             for (int i = 0; i < t.childCount; i++)
             {
@@ -379,7 +608,7 @@ public class CartaAMover : MonoBehaviour
     }
 
     // N = cantidad de cartas iguales a ella en el campo, multiplica su poder por N
-    void MultiplicaPoder(int id ,string nombre, int faccion, string filas)
+    void MultiplicaPoder(int id, string nombre, int faccion, string filas)
     {
         Transform t = GameObject.Find("Fila" + filas + faccion.ToString()).transform;
         int contador = 1;

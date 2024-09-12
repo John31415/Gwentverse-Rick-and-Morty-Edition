@@ -88,6 +88,11 @@ MonoBehaviour:
   cartaAMover: {fileID: 2890446157661051169}
   cartaAMano: {fileID: 5665340795668512853, guid: cb38b8c71092a564490b77483305cb65, type: 3}
   cartaARIP: {fileID: 5665340795668512853, guid: 16bcd9cf79914894aa5bcb20994b8fdc, type: 3}
+  bandReciente: 0
+  HandCard1: {fileID: 5665340795668512853, guid: cb38b8c71092a564490b77483305cb65, type: 3}
+  HandCard2: {fileID: 5665340795668512853, guid: 8b48ec5d871e92043becbfa9d0f2f56b, type: 3}
+  FieldCard: {fileID: 2890446157661051169}
+  GraveyardCard: {fileID: 5665340795668512853, guid: 16bcd9cf79914894aa5bcb20994b8fdc, type: 3}
 --- !u!114 &72810166805593537
 MonoBehaviour:
   m_ObjectHideFlags: 0

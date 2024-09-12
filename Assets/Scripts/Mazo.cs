@@ -106,7 +106,7 @@ public class Mazo : MonoBehaviour
         mazoSize1 += BDCartas.cartaOdin1.Count;
 
         //Mezclando Mazo2
-        for (int i = 0; i < mazoSize2 - 16; i++)
+        for (int i = 0; i < mazoSize2 - 1; i++)
         {
             int r = Random.Range(0, 23);
             (mazoCartas2[i], mazoCartas2[r]) = (mazoCartas2[r], mazoCartas2[i]);
@@ -115,6 +115,8 @@ public class Mazo : MonoBehaviour
         mazoCartas2 = Enumerable.Concat(mazoCartas2, BDCartas.cartaOdin2).ToList();
         mazoCartas2 = Enumerable.Concat(mazoCartas2, BDCartas.cartaLiderList2).ToList();
         mazoSize2 += BDCartas.cartaOdin2.Count;
+        staticMazoCartas1 = mazoCartas1;
+        staticMazoCartas2 = mazoCartas2;
 
         //Repartir Cartas
         StartCoroutine(ComenzarJuego());
@@ -123,8 +125,6 @@ public class Mazo : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        staticMazoCartas1 = mazoCartas1;
-        staticMazoCartas2 = mazoCartas2;
 
         if (mazoSize1 < 20)
         {

@@ -197,6 +197,7 @@ public class Controlador : MonoBehaviour
                 else
                 {
                     cartaAMano1.GetComponent<EstaCarta>().estaCarta[0] = Mazo.staticMazoCartas1[Mazo.mazoSize1 - 1];
+                    cartaAMano1.GetComponent<EstaCarta>().esteId = BuscarId(Mazo.staticMazoCartas1[Mazo.mazoSize1 - 1].id);
                     Mazo.mazoSize1--;
                     bandDestructorAux = true;
                     Destructor(cartaAMano1);
@@ -210,6 +211,7 @@ public class Controlador : MonoBehaviour
                 else
                 {
                     cartaAMano2.GetComponent<EstaCarta>().estaCarta[0] = Mazo.staticMazoCartas2[Mazo.mazoSize2 - 1];
+                    cartaAMano2.GetComponent<EstaCarta>().esteId = BuscarId(Mazo.staticMazoCartas2[Mazo.mazoSize2 - 1].id);
                     Mazo.mazoSize2--;
                     bandDestructorAux = true;
                     Destructor(cartaAMano2);
@@ -221,6 +223,18 @@ public class Controlador : MonoBehaviour
             aux = true;
             numeroRonda++;
         }
+    }
+
+    public int BuscarId(int id)
+    {
+        for (int i = 0; i < BDCartas.cartasTodas.Count; i++)
+        {
+            if (BDCartas.cartasTodas[i].id == id)
+            {
+                return i;
+            }
+        }
+        return 0;
     }
 
     IEnumerator Verificar()

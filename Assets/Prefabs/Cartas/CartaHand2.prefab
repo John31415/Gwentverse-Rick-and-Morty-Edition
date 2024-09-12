@@ -303,17 +303,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   estaCarta:
-  - id: 17
-    nombre: Vendedor de puertas falsas reales
+  - id: 47
+    nombre: Jacob Philip
     faccion: 2
-    filas: S
+    filas: M
     poder: 0
-    efectosId: 2
+    efectosId: 10
     ataque: 0
-    tipoId: 2
-    descripcion: Despeja Clima de la fila(S) del campo enemigo.
-    spriteImagen: {fileID: 21300000, guid: 1e883c77fa1143a4ba83598b45eb28d5, type: 3}
-  esteId: 13
+    tipoId: 6
+    descripcion: Se intercambia por una carta de unidad propia a seleccionar.
+    spriteImagen: {fileID: 21300000, guid: 5c56e9620b20d754da0ca3610a27a2ac, type: 3}
+  esteId: 48
   imagenSprite: {fileID: 1136791204523050569}
   Mano1: {fileID: 0}
   numeroCartasMazo1: 0

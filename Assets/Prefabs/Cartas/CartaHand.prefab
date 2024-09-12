@@ -303,18 +303,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   estaCarta:
-  - id: 33
-    nombre: Birdperson
+  - id: 8
+    nombre: Galaxy
     faccion: 1
     filas: R
-    poder: 2
-    efectosId: 8
-    ataque: 0
-    tipoId: 5
-    descripcion: Su poder se multiplica por la cantidad de cartas iguales a ella
-      en el campo.
-    spriteImagen: {fileID: 21300000, guid: e08eb760a634add45a01c6177176dd4f, type: 3}
-  esteId: 13
+    poder: 0
+    efectosId: 1
+    ataque: 3
+    tipoId: 1
+    descripcion: Resta 3 al poder de cada carta en su fila.
+    spriteImagen: {fileID: 21300000, guid: 9e5fc5d78709d27469ffd1c4107b4812, type: 3}
+  esteId: 4
   imagenSprite: {fileID: 1136791204523050569}
   Mano1: {fileID: 0}
   numeroCartasMazo1: 0

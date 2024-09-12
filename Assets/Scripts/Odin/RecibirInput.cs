@@ -23,13 +23,13 @@ public class RecibirInput : MonoBehaviour
         string userInput = "";
         userInput += inputField.text;
         userInput += "\n";
-        Run run = new Run(null, userInput);
+        Run.RunCode(userInput);
         if (!(Run.Errors == ""))
         {
             errors.text = "\"" + ErrorPhrases.RandErrorPhrase() + "\"\n\n" + Run.Errors + "\nThe build failed. Fix the build errors and run again.";
             return;
         }
-        CardCreator cardCreator = new CardCreator(run.CardsCreated);
+        CardCreator cardCreator = new CardCreator(Run.CardsCreated);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 2);
     }
 }

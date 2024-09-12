@@ -77,5 +77,4 @@ public class EstaCarta : MonoBehaviour
         }
         imagenSprite.sprite = estaCarta[0].spriteImagen;
     }
-
 }

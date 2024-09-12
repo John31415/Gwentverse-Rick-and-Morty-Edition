@@ -25,6 +25,10 @@ public class CardCreator
             {
                 imagen = sprites[nombre];
             }
+            else
+            {
+                imagen = sprites[imagen];
+            }
             Sprite spriteImagen = Resources.Load<Sprite>(imagen);
             List<Carta> carta = new List<Carta> { new Carta(id, nombre, faccion, filas, poder, efectosId, ataque, tipoId, descripcion, spriteImagen) };
             BDCartas.cartasTodas.Add(carta[0]);
@@ -47,8 +51,8 @@ public class CardCreator
         if (tipo == "Despeje") return 2;
         if (tipo == "Lider") return 3;
         if (tipo == "Oro") return 4;
-        if (tipo == "Plata") return 5;
-        return 6;
+        if (tipo == "Senuelo") return 6;
+        return 5;
     }
 
     public void InicializarSprites()

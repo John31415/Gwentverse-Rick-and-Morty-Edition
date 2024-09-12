@@ -9,20 +9,20 @@ using static System.Console;
 
 public class DataCollecter
 {
-    public int TriggerPlayer { get; set; }
+    private int TriggerPlayer { get; set; }
     private List<Card> board, deck, otherDeck, hand, otherHand, field, otherField, graveyard, otherGraveyard;
 
-    public Lists Board { get; set; }
-    public Lists Deck { get; set; }
-    public Lists OtherDeck { get; set; }
-    public Lists Hand { get; set; }
-    public Lists OtherHand { get; set; }
-    public Lists Field { get; set; }
-    public Lists OtherField { get; set; }
-    public Lists Graveyard { get; set; }
-    public Lists OtherGraveyard { get; set; }
+    private Lists Board { get; set; }
+    private Lists Deck { get; set; }
+    private Lists OtherDeck { get; set; }
+    private Lists Hand { get; set; }
+    private Lists OtherHand { get; set; }
+    private Lists Field { get; set; }
+    private Lists OtherField { get; set; }
+    private Lists Graveyard { get; set; }
+    private Lists OtherGraveyard { get; set; }
 
-    public void Collect()
+    public void Collect(int ID)
     {
         TriggerPlayer = SistemaTurnos.turno;
         int OtherPlayer = TriggerPlayer % 2 + 1;
@@ -37,10 +37,12 @@ public class DataCollecter
         otherGraveyard = new List<Card>();
         foreach (var carta in CollectZone("PanelHand" + TriggerPlayer))
         {
+            if (carta.id == ID) continue;
             hand.Add(CardConverter(carta));
         }
         foreach (var carta in CollectZone("PanelHand" + OtherPlayer))
         {
+            if (carta.id == ID) continue;
             otherHand.Add(CardConverter(carta));
         }
         foreach (var carta in CollectZone("RIP" + TriggerPlayer))
@@ -62,6 +64,22 @@ public class DataCollecter
             {
                 otherField.Add(CardConverter(carta));
             }
+            foreach (var carta in CollectZone("Clima" + range[i].ToString() + TriggerPlayer.ToString()))
+            {
+                field.Add(CardConverter(carta));
+            }
+            foreach (var carta in CollectZone("Clima" + range[i].ToString() + OtherPlayer.ToString()))
+            {
+                otherField.Add(CardConverter(carta));
+            }
+            foreach (var carta in CollectZone("Aumento" + range[i].ToString() + TriggerPlayer.ToString()))
+            {
+                field.Add(CardConverter(carta));
+            }
+            foreach (var carta in CollectZone("Aumento" + range[i].ToString() + OtherPlayer.ToString()))
+            {
+                otherField.Add(CardConverter(carta));
+            }
         }
         if (TriggerPlayer == 1)
         {
@@ -73,31 +91,11 @@ public class DataCollecter
             for (int i = 0; i < Mazo.mazoSize2; i++) deck.Add(CardConverter(Mazo.staticMazoCartas2[i]));
             for (int i = 0; i < Mazo.mazoSize1; i++) otherDeck.Add(CardConverter(Mazo.staticMazoCartas1[i]));
         }
-        board = field;
-        board.Concat(otherField);
-        board.Concat(hand);
-        board.Concat(otherHand);
-        board.Concat(graveyard);
-        board.Concat(otherGraveyard);
-        for (int i = 0; i < 3; i++)
-        {
-            foreach (var carta in CollectZone("Clima" + range[i].ToString() + TriggerPlayer.ToString()))
-            {
-                board.Add(CardConverter(carta));
-            }
-            foreach (var carta in CollectZone("Aumento" + range[i].ToString() + TriggerPlayer.ToString()))
-            {
-                board.Add(CardConverter(carta));
-            }
-            foreach (var carta in CollectZone("Clima" + range[i].ToString() + OtherPlayer.ToString()))
-            {
-                board.Add(CardConverter(carta));
-            }
-            foreach (var carta in CollectZone("Aumento" + range[i].ToString() + OtherPlayer.ToString()))
-            {
-                board.Add(CardConverter(carta));
-            }
-        }
+        board = new List<Card>();
+        board.AddRange(field);
+        board.AddRange(otherField);
+        board.AddRange(graveyard);
+        board.AddRange(otherGraveyard);
         Board = new Lists(board);
         Deck = new Lists(deck);
         OtherDeck = new Lists(otherDeck);
@@ -135,12 +133,18 @@ public class DataCollecter
         if (type == 3) return "Lider";
         if (type == 4) return "Oro";
         if (type == 5) return "Plata";
-        return "Senuelo";
+        if (type == 6) return "Senuelo";
+        return "Desconocido";
     }
 
     private string Faction(int faction)
     {
         if (faction == 1) return "Rick Sanchez";
         return "Morty Smith";
+    }
+
+    public GameState Estado()
+    {
+        return new GameState(TriggerPlayer, Board, Deck, OtherDeck, Hand, OtherHand, Field, OtherField, Graveyard, OtherGraveyard);
     }
 }
