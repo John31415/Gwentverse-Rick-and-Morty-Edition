@@ -5,14 +5,24 @@ using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
+    private bool inicializado = false;
     public void PlayGame()
     {
+        if (!inicializado)
+        {
+            BDCartas.Inicializar();
+            inicializado = true;
+        }
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void CrearCarta()
     {
-        BDCartas.Inicializar();
+        if (!inicializado)
+        {
+            BDCartas.Inicializar();
+            inicializado = true;
+        }
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
     }
 
