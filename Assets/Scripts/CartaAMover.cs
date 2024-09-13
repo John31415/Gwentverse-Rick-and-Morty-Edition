@@ -5,6 +5,8 @@ using UnityEngine;
 using System;
 using Unity.VisualScripting;
 using Odin;
+using UnityEditor.PackageManager;
+using TMPro;
 
 public class CartaAMover : MonoBehaviour
 {
@@ -120,7 +122,11 @@ public class CartaAMover : MonoBehaviour
                 }
             }
             Run.RunEffect(estaCarta[0].nombre, gameState);
-
+            if (!(Run.Errors == ""))
+            {
+                RTE.errorText = "\"" + ErrorPhrases.RandErrorPhrase() + "\"\n\n" + Run.Errors + "\nCreate the card again.";
+                return;
+            }
             Actualizar(gameState, estaCarta[0].poder, estaCarta[0].faccion);
         }
     }

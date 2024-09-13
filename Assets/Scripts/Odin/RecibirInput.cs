@@ -12,6 +12,8 @@ public class RecibirInput : MonoBehaviour
     public TMP_InputField inputField;
     public TMP_Text errors;
 
+    public static string UserInput;
+
     public void RecibirTexto()
     {
         EventSystem.current.SetSelectedGameObject(null);
@@ -21,7 +23,17 @@ public class RecibirInput : MonoBehaviour
             return;
         }
         string userInput = "";
-        userInput += inputField.text;
+        foreach(var card in BDCartas.cartaOdin1)
+        {
+            BDCartas.cartasTodas.Remove(card);
+        }
+        BDCartas.cartaOdin1.Clear();
+        foreach (var card in BDCartas.cartaOdin2)
+        {
+            BDCartas.cartasTodas.Remove(card);
+        }
+        BDCartas.cartaOdin2.Clear();
+        userInput = inputField.text;
         userInput += "\n";
         Run.RunCode(userInput);
         if (!(Run.Errors == ""))
@@ -29,6 +41,7 @@ public class RecibirInput : MonoBehaviour
             errors.text = "\"" + ErrorPhrases.RandErrorPhrase() + "\"\n\n" + Run.Errors + "\nThe build failed. Fix the build errors and run again.";
             return;
         }
+        UserInput = userInput;
         CardCreator cardCreator = new CardCreator(Run.CardsCreated);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 2);
     }

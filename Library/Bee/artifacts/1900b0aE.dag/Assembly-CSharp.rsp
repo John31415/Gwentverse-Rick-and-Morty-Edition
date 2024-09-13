@@ -395,6 +395,8 @@
 "Assets/Scripts/Odin/CardCreator.cs"
 "Assets/Scripts/Odin/DataCollecter.cs"
 "Assets/Scripts/Odin/RecibirInput.cs"
+"Assets/Scripts/Odin/RTE.cs"
+"Assets/Scripts/Odin/StartCrear.cs"
 "Assets/Scripts/Puntos.cs"
 "Assets/Scripts/Robar2.cs"
 "Assets/Scripts/Senuelo.cs"

@@ -100,6 +100,13 @@ public class Controlador : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
 
+    public void VolverACrear()
+    {
+        StartCrear.code = RecibirInput.UserInput;
+        StartCrear.errors = RTE.errorText;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
     IEnumerator GanadorJuego()
     {
         yield return new WaitForSeconds(3);
